@@ -5,7 +5,7 @@ module.exports = {
       name: `Angel Paredes`,
       summary: `A veces le gusta desvariar sobre cosas, principalmente tecnología.`,
     },
-    description: `Quería escribir algo, tal vez aquí pueda.`,
+    description: `Este es el blog de Ángel Paredes (@PeopleNArthax), apasionado por la tecnología. Puedes encontrar diferentes tipos de contenido, principalmente relacionado con las tecnologías web y los aspectos sociales del desarrollo de software`,
     siteUrl: `https://angelpared.es/`,
     social: {
       twitter: `peoplenarthax`,
@@ -70,8 +70,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 }

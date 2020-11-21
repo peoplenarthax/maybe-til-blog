@@ -55,7 +55,7 @@
   --fontSize-6: 2.488rem;
   --fontSize-7: 2.986rem;
   --color-primary: #9AD3BC;
-  --color-text: #F3EAC2;
+  --color-text: #fef6e9;
   --color-text-light: #8a67f4;
   --color-heading: #14B1AB;
   --color-accent: #d1dce5;
@@ -268,6 +268,10 @@ a:focus {
   margin-bottom: var(--spacing-16);
 }
 
+strong, b { 
+  text-shadow: 1px 2px 8px rgb(0 188 212 / 0.3);
+}
+
 nav.site-navigation {
   width: 100%;
 }
@@ -385,7 +389,7 @@ section[itemprop="articleBody"] ul {
 
 @media (max-width: 42rem) {
   blockquote {
-    padding: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4);
+    padding: var(--spacing-2) var(--spacing-4) var(--spacing-2) var(--spacing-4);
     margin-left: var(--spacing-0);
   }
   ul,

@@ -12,10 +12,10 @@ const BlogIndex = ({ data, location }) => {
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
-        <SEO title="All posts" />
+        <SEO title="Todas los posts"/>
         <Bio />
         <p>
-          Maybe I just started this
+          Si no ves nada, es porqué no hay nada. Visita mis perfiles.
         </p>
       </Layout>
     )
@@ -77,7 +77,7 @@ export const pageQuery = graphql`
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "MMMM DD, YYYY", locale: "es")
           title
           description
         }
