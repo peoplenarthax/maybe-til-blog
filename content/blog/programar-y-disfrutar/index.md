@@ -19,7 +19,7 @@ Neopets es una especie de juego / comunidad virtual donde controlas tus mascotas
 
 ![Perfil de usuario de neopets personalizado](neopets.jpg)
 
-Los niños crecen y cuando neopets se quedó algo pequeño me moví a un mundo un poco más diverso (en realidad vi que mi hermano empezar su propio blog). Aunque no hayan sobrevivido a neopets, ambos *[Pobladores Lycos](https://web.archive.org/web/*/pobladores.lycos.es)* y *[Geocities](	http://geocities.yahoo.com/)* marcaron un antes y un después para todos los que querían tener una web personal.
+Los niños crecen y cuando neopets se quedó algo pequeño me moví a un mundo un poco más diverso (en realidad vi que mi hermano empezar su propio blog). Aunque no hayan sobrevivido a neopets, ambos *[Pobladores Lycos](https://web.archive.org/web/pobladores.lycos.es)* y *[Geocities](http://geocities.yahoo.com/)* marcaron un antes y un después para todos los que querían tener una web personal.
 
 ![Portal de Pobladores Lycos](pobladores.jpg)
 
