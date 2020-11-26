@@ -9,7 +9,8 @@ En este articulo solo quiero compartir un poco cual ha sido <strong>mi experienc
 
 He decidido dividir este artículo en diferentes partes que puedes ver aquí:
 - Programar y disfrutar todo es empezar (Este artículo)
-- El arte de extrapolar (Pronto!)</div>
+- <a href="/la-carrera-no-lo-es-todo">La carrera no lo es todo</a>
+- Entrevistas, trabajo y progresión</div>
 
 ## El principio
 
