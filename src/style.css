@@ -168,6 +168,7 @@ p {
   --x-height-multiplier: 0.35;
   margin: var(--spacing-0) var(--spacing-0) var(--spacing-8) var(--spacing-0);
   padding: var(--spacing-0);
+  font-weight: 300;
 }
 
 ul,
@@ -305,7 +306,7 @@ nav.site-navigation {
 .gatsby-highlight :not(pre) > code[class*="language-"], .gatsby-highlight  pre[class*="language-"] {
   border-radius: 4px;
   background: var(--background-color) !important;
-  text-shadow: 0 0.1em 0.3em black !important;
+  text-shadow: none !important;
   border: none;
   box-shadow: none;
 }
@@ -322,7 +323,7 @@ nav.site-navigation {
   padding-left: var(--spacing-4);
 }
 
-section[itemprop="articleBody"] ul {
+section[itemprop="articleBody"] ul, section[itemprop="articleBody"] ol {
   padding-left: var(--spacing-4);
 }
 .main-heading {
