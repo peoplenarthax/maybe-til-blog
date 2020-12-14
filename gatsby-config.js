@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Maybe<TIL>`,
+    title: `Vitamina Dev`,
     author: {
       name: `Angel Paredes`,
       summary: `A veces le gusta desvariar sobre cosas, principalmente tecnología.`,
