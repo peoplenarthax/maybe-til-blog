@@ -9,7 +9,6 @@ export const Header = ({title}) => {
 	const [ headerScrolled, setHeaderScrolled] = useState(false)
 	
 	const checkScroll = () => {
-		console.log("A tope!")
 		if (document.documentElement.scrollTop > 75) {
 			setHeaderScrolled(true)
 		} else {
@@ -32,7 +31,7 @@ export const Header = ({title}) => {
 					<Link to="/">{title}</Link>
 				</h1>
 			) : (
-				<Link className="header-link-home" to="/">
+				<Link className="main-heading" to="/">
 					{title}
 		  		</Link>
 			)
