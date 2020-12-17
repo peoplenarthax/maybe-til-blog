@@ -2,6 +2,7 @@
 title: Charla sobre Microfrontends
 date: "2020-12-13T00:00:00.000Z"
 description: "Participe en la Codemotion Madrid 2020 hablando sobre microfrontends."
+tags: ["frontend", "conferencias"]
 ---
 
 Este último año he intentado participar algo más dando charlas tanto internamente como en eventos externos pero debido al COVID muchas de esas charlas fueron canceladas.

@@ -8,10 +8,9 @@ const Layout = ({ location, title, children }) => {
       <Header title={title} />
 
       <div className="gradient-background" aria-hidden="true" />
+
+      <main className="global-wrapper">{children}</main>
       
-      <div className="global-wrapper">
-        <main>{children}</main>
-      </div>
       <Footer />
     </>
   )
