@@ -61,31 +61,31 @@ Y ese fue el principio de todo, nada más lejos del cliché, un “Hola mundo!",
 **No creo que haya que ser purista cuando empiezas a programar**, lo importante es crear una intuición de cómo se resuelven los problemas y un pensamiento más en términos de algoritmo, sin pensar muchísimo en términos de complejidad o buenas prácticas. La complejidad es algo que te puede ayudar a la larga, a entender un poco mejor la naturaleza de la programación y a no reinventar la rueda. Las buenas prácticas son una herramienta para reducir la capacidad de error humano y facilitar la colaboración. Pero ambas pueden ser un poco inconvenientes cuando lo que quieres entender cómo funcionan o satisfacer tu curiosidad.
 
 ```python
-	## Imprime todos los numeros primos entre 1 y 30
+## Imprime todos los numeros primos entre 1 y 30
 
-	# Primer intento
-	i = 2
-	while i < 100:
-		if i == 2:
-			print 2
-		if i == 3:
-			print 3
-		# ...
-		### Yeah... Ya veis por donde iba		
-		i+=1
+# Primer intento
+i = 2
+while i < 100:
+	if i == 2:
+		print 2
+	if i == 3:
+		print 3
+	# ...
+	### Yeah... Ya veis por donde iba		
+	i+=1
 
-    # Algo mejor tras aprender sobre funciones, y otras utilidades
-	def isPrime(number):
-		if number == 1:
-			return False 
-		for i in range(2, number): 
-			if (number % i) == 0: 
-				return False
-		return True
+# Algo mejor tras aprender sobre funciones, y otras utilidades
+def isPrime(number):
+	if number == 1:
+		return False 
+	for i in range(2, number): 
+		if (number % i) == 0: 
+			return False
+	return True
 
-	for prime_candidate in range(2, 30):
-		if isPrime(prime_candidate):
-			print(prime_candidate)
+for prime_candidate in range(2, 30):
+	if isPrime(prime_candidate):
+		print(prime_candidate)
 ```
 
 Al principio daba igual como lo hiciese, lo importante era obtener el resultado que pedía el ejercicio, pero cuantos más ejercicios hacía, el intentar resolverlos de una manera "estática" era más pesado (que no complicado), asique **el pequeño perezoso🦥 que todos llevamos dentro quería ahorrarme tiempo**. Empecé a aprender algo más de algoritmia. Las buenas prácticas fueron más obvias para mi cuando leía el código de otra gente… Pero nunca las interioricé del todo hasta que empecé a trabajar con otros desarrolladores.

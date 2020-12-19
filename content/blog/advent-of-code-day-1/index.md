@@ -60,24 +60,24 @@ El algoritmo es tal que así:
 * number: array ordenado de todos los numeros en los que buscar
 **/
 const findPairWithSum = (sum: number, numbers: number[]) : [number, number] | null => {
-	let leftIndex = 0
-	let rightIndex = numbers.length - 1
-	
-	// Los dos indices indican la misma posicion
-	while (leftIndex < rightIndex) {
-		// Hemos encontrado la solución, salimos del bucle
-		if (numbers[leftIndex] + numbers[rightIndex] == sum) break
-	
-		// La suma es menor que el numero que buscamos
-		if (numbers[leftIndex] + numbers[rightIndex] < sum) {
-			leftIndex++
-		} else {
-			rightIndex--
-		}
-	}
+let leftIndex = 0
+let rightIndex = numbers.length - 1
 
-	// Devolver los dos numeros o null en caso de que no se encuentre
-	return leftIndex < rightIndex ? [numbers[leftIndex], numbers[rightIndex]] : null
+// Los dos indices indican la misma posicion
+while (leftIndex < rightIndex) {
+	// Hemos encontrado la solución, salimos del bucle
+	if (numbers[leftIndex] + numbers[rightIndex] == sum) break
+
+	// La suma es menor que el numero que buscamos
+	if (numbers[leftIndex] + numbers[rightIndex] < sum) {
+		leftIndex++
+	} else {
+		rightIndex--
+	}
+}
+
+// Devolver los dos numeros o null en caso de que no se encuentre
+return leftIndex < rightIndex ? [numbers[leftIndex], numbers[rightIndex]] : null
 }
 ```
 
