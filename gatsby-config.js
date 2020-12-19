@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Maybe<TIL>`,
+    title: `Vitamina Dev`,
     author: {
       name: `Angel Paredes`,
       summary: `A veces le gusta desvariar sobre cosas, principalmente tecnología.`,
@@ -42,7 +42,20 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
+          {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+              plugins: [
+                {
+                  resolve: `gatsby-remark-highlight-code`,
+                  options: {
+                    terminal: 'carbon',
+                    theme: 'seti'
+                  }
+                },
+              ],
+            },
+          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],

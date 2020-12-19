@@ -2,6 +2,7 @@
 title: Advent of Code Explicado - Dia 1
 date: "2020-12-01T00:00:00.000Z"
 description: "Los elfos me informan de que la hoja de gastos no esta bien. "
+tags: ["programacion"]
 ---
 
 Para añadir un par de entradas algo más cortas y fáciles de seguir he decidido apuntarme un año más al [Advent of Code](https://adventofcode.com/), para los que no sepan de que se trata, todos los años desde 2015 se realiza este desafío de programación. Se llama así porque se realiza al mismo tiempo que el adviento cristiano, del 1 al 25 de Diciembre y cada día se publica un pequeño problema (hay un poco de historia detrás de cada problema), la dificultad de los problemas se supone que va aumentando según nos acercamos a Navidad.

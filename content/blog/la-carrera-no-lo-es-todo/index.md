@@ -2,6 +2,7 @@
 title: La carrera no lo es todo
 date: "2020-11-22T22:12:03.284Z"
 description: "Parte 2: Intentar hacer Ing. de diseño industrial y acabar en telecomunicaciones y haciendo desarrollo web"
+tags: ["orientacion"]
 ---
 
 Esta segunda parte de mi "biografía" habla un poco del proceso de elegir carrera y un poco mi experiencia durante la carrera.

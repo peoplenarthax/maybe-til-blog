@@ -23,9 +23,11 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
+      <SEO title="Todas las entradas" />
+
       <Bio />
-      <ol style={{ listStyle: `none` }}>
+
+      <ol class="post-list" style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
 
@@ -42,8 +44,14 @@ const BlogIndex = ({ data, location }) => {
                       <span itemProp="headline">{title}</span>
                     </Link>
                   </h2>
-                  <small>{post.frontmatter.date}</small>
                 </header>
+
+                <div class="categories">
+                  {post.frontmatter.tags.map(tag => 
+                    <span key={tag} className={tag}>#{tag}</span>
+                  )}
+                </div>
+                
                 <section>
                   <p
                     dangerouslySetInnerHTML={{
@@ -52,11 +60,14 @@ const BlogIndex = ({ data, location }) => {
                     itemProp="description"
                   />
                 </section>
+
+                <time>{post.frontmatter.date}</time>
               </article>
             </li>
           )
         })}
       </ol>
+      
     </Layout>
   )
 }
@@ -77,9 +88,10 @@ export const pageQuery = graphql`
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY", locale: "es")
+          date(formatString: "MMM YYYY", locale: "es")
           title
           description
+          tags
         }
       }
     }

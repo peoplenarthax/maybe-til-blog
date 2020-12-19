@@ -2,6 +2,7 @@
 title: Programar y disfrutar todo es empezar
 date: "2020-11-20T22:12:03.284Z"
 description: "Parte 1: Se empieza personalizando un perfil de Neopets y se acaba haciendo una ingeniería."
+tags: ["orientacion"]
 ---
 
 <div class="disclaimer">
