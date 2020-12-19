@@ -299,12 +299,15 @@ section[itemprop="articleBody"] ul, section[itemprop="articleBody"] ol {
   color: var(--color-orange-500);
 }
 
-.post-list-item time {
-  grid-area: date;
+time {
   justify-self: end;
 
   color: var(--color-dark-blue-300);
   font-size: var(--font-size-0);
+}
+
+.post-list-item time {
+  grid-area: date;
 }
 
 .post-list-item .categories {
@@ -380,11 +383,22 @@ section[itemprop="articleBody"] ul, section[itemprop="articleBody"] ol {
 .blog-post header h1 {
   color: var(--color-header-primary);
 
-  margin: var(--spacing-0) var(--spacing-0) var(--spacing-4) var(--spacing-0);
+  margin: var(--spacing-0) var(--spacing-0) var(--spacing-1) var(--spacing-0);
 
   border-image: linear-gradient(to left, var(--color-purple), var(--color-red)) 30;
   border-width: 0 0 3px 0;
   border-style: solid; 
+}
+
+.blog-post header {
+  margin-bottom: var(--spacing-4);
+}
+
+.blog-post .meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .blog-post header p {
@@ -405,7 +419,8 @@ section[itemprop="articleBody"] ul, section[itemprop="articleBody"] ol {
   display: block;
 
   max-width: 90%;
-  height: auto;
+
+  z-index: -1;
 }
 
 /* NEW LAYOUT */

@@ -25,7 +25,7 @@ Parece ser que hay un problema con mi hoja de gastos y que debo **encontrar los 
 
 Lo más típico es que te den un documento que deberás de alguna manera leer en tu programa, en mi caso estoy usando nodejs con typescript. Siempre que afronto un problema intento dividirlo en varias partes:
 
-- 👩‍💻**Leer la información que necesito y transformarla a un formato más cómodo**. En este caso uso `fs` para leer línea a línea un fichero que he creado y simplemente lo he transformado para que nos devuelva un array de números (no hago ningún tipo de check porque el enunciado me dice que tipo de información me llega y que hay una solución).
+- 👩‍💻 **Leer la información que necesito y transformarla a un formato más cómodo**. En este caso uso `fs` para leer línea a línea un fichero que he creado y simplemente lo he transformado para que nos devuelva un array de números (no hago ningún tipo de check porque el enunciado me dice que tipo de información me llega y que hay una solución).
 
 
 ```typescript
@@ -43,7 +43,7 @@ const readNumberArrayInput = (fileName: string) : number[] =>
 
 - 📋**Escribir y jugar con el problema en papel (u otro formato)** siempre me ayuda bastante. En este caso la primera solución que se me viene a la cabeza siempre suele ser por fuerza bruta. Sabiendo que hay dos números, pruebo todas las combinaciones con un doble `for loop`. **La fuerza bruta siempre funciona**, pero es una cuestión de eficiencia por la que solemos evitarla. Sin meterme en mucho lio, para este problema la [complejidad](https://es.wikipedia.org/wiki/Complejidad_temporal) sería O(n<sup>2</sup>), si no entiendes que es la complejidad, no hace falta ahora mismo e intentare explicarlo en otro post.
 
-La segunda vez, intente pensar si había una forma de encontrar la solución recorriendo una única vez todo el array (por ende, reduciendo la complejidad a O(n)<sup>*</sup>). Tal vez de la manera en que los números estaban ordenados no sería posible ¿Cómo puedo saber si el número que viene es más grande o viceversa? Pero, **si ordenamos los números ya hay una característica de la información que podemos aprovechar** 💡.
+La segunda vez, intente pensar si había una forma de encontrar la solución recorriendo una única vez todo el array (por ende, reduciendo la complejidad a O(n)<sup>*</sup>). Tal vez de la manera en que los números estaban ordenados no sería posible ¿Cómo puedo saber si el número que viene es más grande o viceversa? Pero 💡, **si ordenamos los números ya hay una característica de la información que podemos aprovechar** .
 
 Si tenemos una lista con 4 números `const lista = [3, 2, 4, 1]`, yo no podría garantizar que `lista[0] + lista[3] >= lista[0] + lista[2]`, **cuando la información esta desorganizada, es difícil hacer predicciones sobre los datos**. Pero si en lugar de eso tuviésemos `[4, 3, 2, 1]`, siempre podríamos, porque sé que mi lista tiene un orden decreciente. Aprovechando esto, podemos buscar los dos números que suman 2020 de manera más sencilla que comprobando todas las combinaciones.
 

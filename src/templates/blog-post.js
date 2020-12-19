@@ -23,7 +23,14 @@ const BlogPostTemplate = ({ data, location }) => {
       >
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <div class="meta">
+            <div class="categories">
+                  {post.frontmatter.tags.map(tag => 
+                    <span key={tag} className={tag}>#{tag}</span>
+                  )}
+            </div>
+            <time>{post.frontmatter.date}</time>
+          </div>
         </header>
 
         <section
@@ -36,7 +43,6 @@ const BlogPostTemplate = ({ data, location }) => {
         <ul
           style={{
             display: `flex`,
-            flexWrap: `wrap`,
             justifyContent: `space-between`,
             listStyle: `none`,
             padding: 0,
@@ -84,8 +90,9 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY", locale: "es")
+        date(formatString: "MMM YYYY", locale: "es")
         description
+        tags
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {

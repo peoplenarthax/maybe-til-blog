@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Vitamina Dev`,
     author: {
-      name: `Angel Paredes`,
+      name: `Ángel Paredes aka "People"`,
       summary: `A veces le gusta desvariar sobre cosas, principalmente tecnología.`,
     },
     description: `Este es el blog de Ángel Paredes (@PeopleNArthax), apasionado por la tecnología. Puedes encontrar diferentes tipos de contenido, principalmente relacionado con las tecnologías web y los aspectos sociales del desarrollo de software`,
@@ -43,18 +43,11 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-transformer-remark`,
+            resolve: `gatsby-remark-highlight-code`,
             options: {
-              plugins: [
-                {
-                  resolve: `gatsby-remark-highlight-code`,
-                  options: {
-                    terminal: 'carbon',
-                    theme: 'seti'
-                  }
-                },
-              ],
-            },
+              terminal: 'carbon',
+              theme: 'seti'
+            }
           },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
