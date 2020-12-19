@@ -283,6 +283,9 @@ section[itemprop="articleBody"] ul, section[itemprop="articleBody"] ol {
   padding-left: 4px;
 }
 
+.post-list {
+  padding-bottom: var(--spacing-8);
+}
 .post-list-item header {
   grid-area: title;
   font-size: var(--font-size-4);
