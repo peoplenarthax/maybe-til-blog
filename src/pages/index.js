@@ -24,6 +24,9 @@ const BlogIndex = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="Todas las entradas" />
+
+      <Bio />
+
       <ol class="post-list" style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
@@ -42,11 +45,13 @@ const BlogIndex = ({ data, location }) => {
                     </Link>
                   </h2>
                 </header>
+
                 <div class="categories">
                   {post.frontmatter.tags.map(tag => 
                     <span key={tag} className={tag}>#{tag}</span>
                   )}
                 </div>
+                
                 <section>
                   <p
                     dangerouslySetInnerHTML={{
@@ -62,7 +67,7 @@ const BlogIndex = ({ data, location }) => {
           )
         })}
       </ol>
-      <Bio />
+      
     </Layout>
   )
 }

@@ -6,5 +6,7 @@ import "./src/normalize.css"
 // custom CSS styles
 import "./src/style.css"
 
-// Highlighting for code blocks
-import "prismjs/themes/prism-twilight.css"
+// Styling codeblocks
+import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader'
+
+deckDeckGoHighlightElement();
