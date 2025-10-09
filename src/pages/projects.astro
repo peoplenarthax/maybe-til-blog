@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
+
+const allProjects = await getCollection("projects");
+const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Projects - Angel Paredes"
+  description="Explore my portfolio of web development projects, from full-stack applications to open-source contributions."
+>
+  <div class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Hero Section -->
+      <div class="text-center mb-16">
+        <h1
+          class="text-4xl md:text-5xl font-bold text-text-light dark:text-primary-100 mb-6"
+        >
+          My Projects
+        </h1>
+        <p
+          class="text-xl text-text-light/80 dark:text-text-dark max-w-3xl mx-auto"
+        >
+          A collection of projects I've worked on, ranging from personal
+          experiments to production applications.
+        </p>
+      </div>
+
+      <!-- Projects Grid -->
+      {
+        sortedProjects.length > 0 ? (
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {sortedProjects.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16">
+            <div class="text-gray-400 dark:text-gray-500 text-6xl mb-4">🚧</div>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              Projects Coming Soon
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              I'm currently working on some exciting projects. Check back soon!
+            </p>
+          </div>
+        )
+      }
+
+      <!-- CTA Section -->
+      <div class="mt-16 text-center bg-gray-50 dark:bg-gray-800 rounded-lg p-8">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          Interested in Collaborating?
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+          I'm always open to discussing new projects, whether it's a freelance
+          opportunity, open-source contribution, or just brainstorming ideas.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="mailto:hello@angelpared.es"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent-600 hover:bg-accent-700 dark:bg-accent-500 dark:hover:bg-accent-600 transition-colors"
+          >
+            Get In Touch
+          </a>
+          <a
+            href="https://github.com/angelparedes"
+            class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

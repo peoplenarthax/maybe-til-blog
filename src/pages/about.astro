@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About - Angel Paredes"
+  description="Learn more about Angel Paredes - software developer with expertise in full-stack development, modern web technologies, and clean code practices."
+>
+  <div class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <h1
+          class="text-4xl md:text-5xl font-bold text-text-light dark:text-primary-100 mb-4"
+        >
+          Who am I?
+        </h1>
+        <p class="text-lg text-text-light/80 dark:text-text-dark mb-6">
+          I am <strong class="text-text-light dark:text-primary-100"
+            >Angel Paredes</strong
+          >, based in <strong class="text-text-light dark:text-primary-100"
+            >Spain</strong
+          > and working at <strong class="text-text-light dark:text-primary-100"
+            >Datadog</strong
+          >.
+        </p>
+
+        <button
+          id="tell-me-more-btn"
+          class="inline-flex items-center px-6 py-3 bg-primary-600/80 dark:bg-primary-500/80 text-white rounded-lg hover:bg-primary-700/80 dark:hover:bg-primary-600/80 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mb-6"
+        >
+          Tell me more
+          <svg
+            class="ml-2 w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <div id="additional-info" class="hidden">
+          <p
+            id="typewriter-text"
+            class="text-lg text-text-light/80 dark:text-text-dark leading-relaxed"
+          >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const button = document.getElementById("tell-me-more-btn");
+      const additionalInfo = document.getElementById("additional-info");
+      const typewriterText = document.getElementById("typewriter-text");
+
+      if (!button || !additionalInfo || !typewriterText) return;
+
+      const fullText =
+        'Passionate Engineering Manager at Datadog, mentoring aspiring engineers and advocating for the importance of soft skills in achieving success. Sometimes I like to define myself as "proud holistic hobbyist".';
+
+      function typeWriter(text: string, element: HTMLElement, speed = 20) {
+        element.innerHTML = "";
+        let i = 0;
+
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
+        }
+
+        type();
+      }
+
+      button.addEventListener("click", function () {
+        // Hide the button with fade out
+        button.style.transition = "opacity 0.2s ease, transform 0.2s ease";
+        button.style.opacity = "0";
+        button.style.transform = "scale(0.95)";
+
+        setTimeout(() => {
+          button.style.display = "none";
+        }, 200);
+
+        // Show the additional info div with a smooth slide down
+        setTimeout(() => {
+          additionalInfo.classList.remove("hidden");
+          additionalInfo.style.opacity = "0";
+          additionalInfo.style.transform = "translateY(-20px)";
+
+          // Animate the container appearance
+          setTimeout(() => {
+            additionalInfo.style.transition =
+              "opacity 0.3s ease, transform 0.3s ease";
+            additionalInfo.style.opacity = "1";
+            additionalInfo.style.transform = "translateY(0)";
+          }, 50);
+
+          // Start typewriter effect after container animation
+          setTimeout(() => {
+            typeWriter(fullText, typewriterText);
+          }, 350);
+        }, 100);
+      });
+    });
+  </script>
+</BaseLayout>

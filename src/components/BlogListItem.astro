@@ -1,0 +1,105 @@
+---
+import { getReadingTime, formatReadingTime } from "../utils/readingTime";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  post: CollectionEntry<"posts"> | CollectionEntry<"readings"> | any;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, tags, contentType } = post.data;
+const isReading = contentType === "reading";
+const isPost = contentType === "post";
+const readingTime = getReadingTime(post.body);
+---
+
+<article
+  class="py-6 border-b border-accent-300/30 dark:border-highlight-dark/20 last:border-b-0"
+>
+  <!-- Content Type Badge -->
+  <div class="mb-3">
+    {
+      isReading && (
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+          📖 Readings
+        </span>
+      )
+    }
+  </div>
+
+  <div
+    class="flex items-center text-sm text-text-light/60 dark:text-text-dark/70 mb-2"
+  >
+    <time datetime={pubDate.toISOString()}>
+      {
+        pubDate.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      }
+    </time>
+    <span class="mx-2">•</span>
+    <span>{formatReadingTime(readingTime)}</span>
+  </div>
+
+  <h3
+    class="text-xl font-semibold text-accent-700 dark:text-primary-200 mb-3 hover:text-accent-600 dark:hover:text-primary-100 transition-colors"
+  >
+    <a href={`/blog/${post.slug}`}>
+      {title}
+    </a>
+  </h3>
+
+  <!-- Reading-specific information -->
+  {
+    isReading && post.data.originalAuthor && (
+      <div class="mb-4">
+        <p class="text-sm text-gray-600 dark:text-gray-400 italic">
+          <strong>Original:</strong> {post.data.originalAuthor}
+          {post.data.originalSite && ` on ${post.data.originalSite}`}
+          {post.data.originalPubDate && (
+            <span>
+              {" "}
+              •{" "}
+              {post.data.originalPubDate.toLocaleDateString("en-US", {
+                month: "numeric",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </span>
+          )}
+        </p>
+        <p class="text-sm text-gray-500 dark:text-gray-500 mt-1 italic">
+          <strong>Curated:</strong>{" "}
+          {pubDate.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+      </div>
+    )
+  }
+
+  <!-- Only show description for posts, not readings -->
+  {
+    !isReading && (
+      <p class="text-text-light/80 dark:text-text-dark/90 mb-4 leading-relaxed">
+        {description}
+      </p>
+    )
+  }
+
+  {
+    tags && tags.length > 0 && (
+      <div class="flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium text-accent-600 dark:text-highlight-dark bg-accent-100/50 dark:bg-highlight-dark/10 border border-accent-200/50 dark:border-highlight-dark/20">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )
+  }
+</article>

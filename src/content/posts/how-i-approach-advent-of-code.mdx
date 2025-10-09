@@ -1,0 +1,117 @@
+---
+title: "How I approach an Advent of Code problem"
+description: "My methodology for tackling coding challenges, from brute force to optimized solutions using real examples."
+pubDate: 2020-11-15
+tags: ["programming", "problem-solving"]
+contentType: "post"
+---
+
+I decided to sign up once again for [Advent of Code](https://adventofcode.com/). For those who don't know what it's about, every year since 2015 this programming challenge takes place. It's called that because it happens at the same time as Christian Advent, from December 1st to 25th, and each day a small problem is published (there's a bit of story behind each problem). The difficulty of the problems is supposed to increase as we get closer to Christmas.
+
+With that said, 🔥 **Let's get to it!** 🔥
+
+> **Disclaimer**: My answers are not always the most optimal nor the only way to solve these problems, so keep an open mind to get the most out of these little entries. [If you just want the solution to the problem, you can see it on my GitHub](https://github.com/peoplenarthax/code-challenges/blob/main/advent-of-code-2020/day-1/index.ts)
+
+## The Problem
+
+In this first day, we're told that this year we've decided to go to a tropical island that only accepts cash. They take the opportunity to explain that each day of the challenge you can earn two stars (problems are divided into two parts, usually relating the solution of the first to the second part) and that by day 25 you must collect 50 stars. This is just an introduction to the challenge.
+
+### Part 1: Problems with your expenses
+
+It seems there's a problem with my expense sheet and I need to **find the two numbers from a list that add up to 2020**. We're given an example with six numbers `1721, 979, 366, 299, 675, 1456`. You can easily see that `1721 + 299 = 2020`. What they want is the multiplication of those two numbers: `1721 * 299 = 514579`.
+
+### Part 1: Solution
+
+The most typical thing is that they give you a document that you'll need to somehow read in your program. In my case, I'm using Node.js with TypeScript. Whenever I tackle a problem, I try to divide it into several parts:
+
+- 👩‍💻 **Read the information I need and transform it to a more convenient format**. In this case, I use `fs` to read a file I've created line by line and simply transform it to return an array of numbers (I don't do any checks because the statement tells me what type of information I'm getting and that there is a solution).
+
+```typescript
+// This function helps us remove leading and trailing whitespace from input
+// and transform text into a base-10 number
+const trimAndParse = (string: string) => parseInt(string.trim(), 10)
+
+// Standard way to read a document, split it into an array by line
+// and transform each array entry
+const readNumberArrayInput = (fileName: string) : number[] => 
+	fs.readFileSync(fileName).toString()
+	  .split("\n")
+	  .map(trimAndParse)
+```
+
+- 📋**Writing and playing with the problem on paper (or other format)** always helps me quite a bit. In this case, the first solution that comes to mind is usually brute force. Knowing there are two numbers, I try all combinations with a double `for loop`. **Brute force always works**, but it's a matter of efficiency that we usually avoid it. Without getting too complicated, for this problem the [complexity](https://en.wikipedia.org/wiki/Time_complexity) would be O(n²). If you don't understand what complexity is, it's not necessary right now and I'll try to explain it in another post.
+
+The second time, I tried to think if there was a way to find the solution by going through the entire array only once (therefore, reducing the complexity to O(n)*). Maybe the way the numbers were ordered wouldn't make it possible. How can I know if the next number is bigger or vice versa? But 💡, **if we sort the numbers, there's already a characteristic of the information we can take advantage of**.
+
+If we have a list with 4 numbers `const list = [3, 2, 4, 1]`, I couldn't guarantee that `list[0] + list[3] >= list[0] + list[2]`. **When information is disorganized, it's difficult to make predictions about the data**. But if instead we had `[4, 3, 2, 1]`, we always could, because I know my list has a decreasing order. Taking advantage of this, we can search for the two numbers that sum to 2020 more easily than checking all combinations.
+
+The algorithm goes like this:
+  1. Given an array of numbers sorted from smallest to largest, we start checking the beginning and end of the list.
+  2. If the left number plus the right number equals the number we're looking for, we have a solution 🎆
+  3. If the sum is less than the number we're looking for, we move to the next number on the left ➡ (because we know the next number on the left will be greater than the previous one).
+  4. If the sum is greater, we move to the next number on the right ⬅.
+  5. The moment we reach the same number from both sides means we haven't found an answer.
+
+```typescript
+/** 
+* sum: the number we're looking for, 2020 in our case
+* numbers: sorted array of all numbers to search in
+**/
+const findPairWithSum = (sum: number, numbers: number[]) : [number, number] | null => {
+let leftIndex = 0
+let rightIndex = numbers.length - 1
+
+// Both indices point to the same position
+while (leftIndex < rightIndex) {
+	// We found the solution, exit the loop
+	if (numbers[leftIndex] + numbers[rightIndex] == sum) break
+
+	// The sum is less than the number we're looking for
+	if (numbers[leftIndex] + numbers[rightIndex] < sum) {
+		leftIndex++
+	} else {
+		rightIndex--
+	}
+}
+
+// Return the two numbers or null if not found
+return leftIndex < rightIndex ? [numbers[leftIndex], numbers[rightIndex]] : null
+}
+```
+
+With this, the two numbers returned by the formula are multiplied and we'd have our answer.
+
+### Part 2: Extending the problem and solution
+
+To extend our problem, now they ask us for **3 numbers that sum to 2020**. Again, we could do brute force, but the complexity would get worse. Since we already have the solution for 2, we can leverage it for 3.
+
+In my case, for each number:
+1. Starting from the left (from the right works the same way), I take the number and subtract it from 2020.
+2. With the result of the subtraction, I look for two numbers in the remaining elements of the list. **This problem is the same as Part 1!** So we can reuse the function we created.
+
+```typescript
+/** 
+* sum: the number we're looking for, 2020 in our case
+* numbers: sorted array of all numbers to search in
+**/
+const findTripleWithSum = (sum: number, numbers: number[]) : [number, number, number] => {
+	// Starting from the left of the list
+	for(let index = 0; index < numbers.length - 2; index++ ) {
+		// Find the pair that sums to 2020 minus the current number in the rest of the list
+		const pair = findPairWithSum(sum - numbers[index], numbers.slice(index + 1))
+
+		// If it exists, return the number and the pair we found
+		if (pair) {
+			return [numbers[index], ...pair]
+		}
+	}
+}
+```
+
+This solution would have greater complexity than searching for the pair (because we search for a pair for each element in the list that complements to 2020), but less than brute force.
+
+---
+
+And with this, we would have solved day one of the challenge. I hope this has been helpful. You can check [the solution on my GitHub](https://github.com/peoplenarthax/code-challenges/blob/main/advent-of-code-2020/day-1/index.ts) and if you have any questions, you can contact me on social media.
+
+*When I talk about complexity, it's only about the algorithm and I ignore the complexity of sorting the array 😉

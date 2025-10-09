@@ -1,0 +1,256 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { getReadingTime, formatReadingTime } from "../../utils/readingTime";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => {
+    return !data.draft;
+  });
+  const readings = await getCollection("readings", ({ data }) => {
+    return !data.draft;
+  });
+
+  return [
+    ...posts.map((post) => ({
+      params: { slug: post.slug },
+      props: { ...post, contentType: "post" },
+    })),
+    ...readings.map((reading) => ({
+      params: { slug: reading.slug },
+      props: { ...reading, contentType: "reading" },
+    })),
+  ];
+}
+
+const content = Astro.props;
+const { Content } = await content.render();
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  tags,
+  contentType,
+} = content.data;
+const isReading = contentType === "reading";
+const isPost = contentType === "post";
+const readingTime = getReadingTime(content.body);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={heroImage}
+  type="article"
+>
+  <!-- Reading Progress Bar -->
+  <div
+    id="reading-progress"
+    class="fixed top-0 left-0 w-full h-1 bg-accent-600 dark:bg-highlight-dark z-50 transform scale-x-0 origin-left transition-transform"
+  >
+  </div>
+
+  <article class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article Header -->
+      <header class="mb-12">
+        <div class="text-center mb-8">
+          <div
+            class="flex items-center justify-center text-sm text-gray-500 dark:text-gray-400 mb-4"
+          >
+            <time datetime={pubDate.toISOString()}>
+              {
+                pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              }
+            </time>
+            <span class="mx-2">•</span>
+            <span>{formatReadingTime(readingTime)}</span>
+          </div>
+
+          <h1
+            class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
+          >
+            {title}
+          </h1>
+
+          <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            {description}
+          </p>
+        </div>
+
+        {
+          tags && tags.length > 0 && (
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+              {tags.map((tag) => (
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )
+        }
+
+        {
+          heroImage && (
+            <div class="mb-8">
+              <img
+                src={heroImage}
+                alt={title}
+                class="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+              />
+            </div>
+          )
+        }
+
+        {
+          updatedDate && (
+            <div class="text-center text-sm text-gray-500 dark:text-gray-400 border-l-4 border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 pl-4 py-2 rounded-r">
+              Last updated:{" "}
+              {updatedDate.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
+          )
+        }
+      </header>
+
+      <!-- Content based on type -->
+      {isReading ? (
+        <div>
+          <!-- Original Article Information -->
+          {
+            content.data.originalAuthor && (
+              <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-400">
+                <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                  Original Article
+                </h3>
+                <p class="text-blue-800 dark:text-blue-200 mb-2">
+                  <strong>Author:</strong> {content.data.originalAuthor}
+                  {content.data.originalPubDate && (
+                    <span> • <strong>Published:</strong> {content.data.originalPubDate.toLocaleDateString()}</span>
+                  )}
+                </p>
+                {content.data.originalUrl && (
+                  <p class="text-blue-800 dark:text-blue-200">
+                    <strong>Link:</strong> 
+                    <a 
+                      href={content.data.originalUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="ml-1 underline hover:no-underline"
+                    >
+                      Read original article →
+                    </a>
+                  </p>
+                )}
+              </div>
+            )
+          }
+
+          <!-- tl;dr for Readings -->
+          {
+            content.data.briefSummary && (
+              <div class="mt-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                  tl;dr
+                </h3>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {content.data.briefSummary}
+                </p>
+              </div>
+            )
+          }
+
+          <!-- Personal Commentary for Readings -->
+          <div class="mt-8">
+            <div
+              class="prose prose-lg dark:prose-dark max-w-none prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-accent-600 dark:prose-a:text-highlight-dark prose-strong:text-gray-900 dark:prose-strong:text-white prose-code:text-highlight-dark prose-code:bg-background-dark-alt prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-background-dark-alt prose-pre:text-highlight-dark prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-700"
+            >
+              <Content />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <!-- Regular article content for posts -->
+        <div
+          class="prose prose-lg dark:prose-dark max-w-none prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-accent-600 dark:prose-a:text-highlight-dark prose-strong:text-gray-900 dark:prose-strong:text-white prose-code:text-highlight-dark prose-code:bg-background-dark-alt prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-background-dark-alt prose-pre:text-highlight-dark prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-700"
+        >
+          <Content />
+        </div>
+      )}
+
+      <!-- Article Footer -->
+      <footer class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div
+          class="flex flex-col md:flex-row md:items-center md:justify-between"
+        >
+          <div class="mb-4 md:mb-0">
+            <p class="text-gray-600 dark:text-gray-300">
+              {isReading ? 'Curated by' : 'Written by'} <strong class="text-gray-900 dark:text-white"
+                >Angel Paredes</strong
+              >
+            </p>
+          </div>
+          <div class="flex space-x-4">
+            <a
+              href="/blog"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              ← Back to Blog
+            </a>
+            {!isReading && (
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.toString())}`}
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-600 hover:bg-accent-700 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Share on Twitter
+              </a>
+            )}
+          </div>
+        </div>
+      </footer>
+
+      <!-- Additional context for readings -->
+      {isReading && (
+        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <p class="text-sm text-gray-500 dark:text-gray-400 text-center">
+            This is my personal commentary on the original article. 
+            {content.data.originalUrl && (
+              <span> Please read the <a href={content.data.originalUrl} target="_blank" rel="noopener noreferrer" class="underline hover:no-underline">original article</a> for the full context.</span>
+            )}
+          </p>
+        </div>
+      )}
+    </div>
+  </article>
+
+  <script>
+    // Reading progress bar
+    document.addEventListener("DOMContentLoaded", function () {
+      const progressBar = document.getElementById("reading-progress");
+
+      function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+
+        if (progressBar) {
+          progressBar.style.transform = `scaleX(${Math.min(scrollPercent / 100, 1)})`;
+        }
+      }
+
+      window.addEventListener("scroll", updateProgress);
+      updateProgress(); // Initial call
+    });
+  </script>
+</BaseLayout>

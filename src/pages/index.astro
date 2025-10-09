@@ -1,0 +1,254 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogListItem from "../components/BlogListItem.astro";
+import { getCollection } from "astro:content";
+
+// Get all posts and readings
+const allPosts = await getCollection("posts", ({ data }) => {
+  return !data.draft;
+});
+
+const allReadings = await getCollection("readings", ({ data }) => {
+  return !data.draft;
+});
+
+// Combine and sort all content by date
+const allContent = [
+  ...allPosts.map((post) => ({ ...post, contentType: "post" })),
+  ...allReadings.map((reading) => ({ ...reading, contentType: "reading" })),
+].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Get all unique tags from both collections
+const allTags = [
+  ...new Set(allContent.flatMap((item) => item.data.tags)),
+].sort();
+---
+
+<BaseLayout
+  title="Angel Paredes - Software Developer"
+  description="Full-stack developer passionate about building modern web applications with clean, efficient code."
+  currentPage="blog"
+>
+  <!-- Blog Section -->
+  <div class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="mb-8">
+        <h1
+          class="text-4xl md:text-5xl font-bold text-text-light dark:text-primary-100 mb-4"
+        >
+          Blog & Readings
+        </h1>
+        <p class="text-lg text-text-light/80 dark:text-text-dark max-w-3xl">
+          My thoughts on development, engineering, leadership, and curated
+          readings from around the web that I find valuable.
+        </p>
+      </div>
+
+      <!-- Content Type Filter -->
+      <div class="mb-6">
+        <div class="flex flex-wrap items-center gap-2">
+          <h2
+            class="text-lg font-semibold text-text-light dark:text-primary-100"
+          >
+            Content:
+          </h2>
+          <button
+            class="content-filter inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100/80 text-blue-800 dark:text-blue-200 dark:bg-blue-900/80 hover:bg-blue-100/80 dark:hover:bg-blue-100/80 transition-colors cursor-pointer active"
+            data-type="all"
+          >
+            All Content
+          </button>
+          <button
+            class="content-filter inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-50/60 text-blue-700 dark:text-blue-300 dark:bg-blue-800/60 hover:bg-blue-50/80 dark:hover:bg-blue-50/80 transition-colors cursor-pointer"
+            data-type="reading"
+          >
+            Readings
+          </button>
+        </div>
+      </div>
+
+      <!-- Tags Filter -->
+      {
+        allTags.length > 0 && (
+          <div class="mb-8">
+            <div class="flex flex-wrap items-center gap-2">
+              <h2 class="text-lg font-semibold text-text-light dark:text-primary-100">
+                Tags:
+              </h2>
+              <button
+                class="filter-tag inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100/80 text-green-800 dark:text-[rgb(6,52,42)] hover:bg-green-100/80 dark:hover:bg-green-100/80 transition-colors cursor-pointer active"
+                data-tag="all"
+              >
+                All Tags
+              </button>
+              {allTags.map((tag) => (
+                <button
+                  class="filter-tag inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-50/60 text-green-700 dark:text-[rgb(6,52,42)] hover:bg-green-50/80 dark:hover:bg-green-50/80 transition-colors cursor-pointer"
+                  data-tag={tag}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      <!-- Content List -->
+      {
+        allContent.length > 0 ? (
+          <div class="space-y-0" id="content-container">
+            {allContent.map((item) => (
+              <div
+                class="content-item"
+                data-tags={JSON.stringify(item.data.tags)}
+                data-type={item.contentType}
+              >
+                <BlogListItem post={item} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16">
+            <div class="text-text-light/40 dark:text-text-dark/50 text-6xl mb-4">
+              📝
+            </div>
+            <h3 class="text-xl font-semibold text-text-light dark:text-primary-100 mb-2">
+              Content Coming Soon
+            </h3>
+            <p class="text-text-light/70 dark:text-text-dark/80">
+              I'm working on some great content. Check back soon for my first
+              posts and curated readings!
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-accent-600/90 dark:bg-gray-800/60 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white dark:text-text-muted mb-4">
+        Let's Work Together
+      </h2>
+      <p
+        class="text-xl text-accent-100 dark:text-text-dark/90 mb-8 max-w-2xl mx-auto"
+      >
+        I'm always open to discussing new opportunities and interesting
+        projects.
+      </p>
+      <a
+        href="mailto:hello@angelpared.es"
+        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-accent-600 dark:text-background-dark bg-white dark:bg-text-muted hover:bg-accent-50 dark:hover:bg-text-muted/90 transition-colors shadow-lg"
+      >
+        Get In Touch
+      </a>
+    </div>
+  </section>
+
+  <script>
+    // Content type and tag filtering functionality
+    document.addEventListener("DOMContentLoaded", function () {
+      const contentFilters = document.querySelectorAll(".content-filter");
+      const filterTags = document.querySelectorAll(".filter-tag");
+      const contentItems = document.querySelectorAll(".content-item");
+
+      let selectedContentType = "all";
+      let selectedTag = "all";
+
+      function updateFilters() {
+        contentItems.forEach((item) => {
+          const itemTags = JSON.parse(item.getAttribute("data-tags") || "[]");
+          const itemType = item.getAttribute("data-type");
+
+          const typeMatch =
+            selectedContentType === "all" || itemType === selectedContentType;
+          const tagMatch =
+            selectedTag === "all" || itemTags.includes(selectedTag);
+
+          if (typeMatch && tagMatch) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      // Content type filtering
+      contentFilters.forEach((filter) => {
+        filter.addEventListener("click", function () {
+          selectedContentType = this.getAttribute("data-type");
+
+          // Update active state
+          contentFilters.forEach((f) => {
+            f.classList.remove(
+              "active",
+              "bg-blue-100/80",
+              "text-blue-800",
+              "dark:text-blue-200",
+              "dark:bg-blue-900/80"
+            );
+            f.classList.add(
+              "bg-blue-50/60",
+              "text-blue-700",
+              "dark:text-blue-300",
+              "dark:bg-blue-800/60"
+            );
+          });
+          this.classList.add(
+            "active",
+            "bg-blue-100/80",
+            "text-blue-800",
+            "dark:text-blue-200",
+            "dark:bg-blue-900/80"
+          );
+          this.classList.remove(
+            "bg-blue-50/60",
+            "text-blue-700",
+            "dark:text-blue-300",
+            "dark:bg-blue-800/60"
+          );
+
+          updateFilters();
+        });
+      });
+
+      // Tag filtering
+      filterTags.forEach((tag) => {
+        tag.addEventListener("click", function () {
+          selectedTag = this.getAttribute("data-tag");
+
+          // Update active state
+          filterTags.forEach((t) => {
+            t.classList.remove(
+              "active",
+              "bg-green-100/80",
+              "text-green-800",
+              "dark:text-[rgb(6,52,42)]"
+            );
+            t.classList.add(
+              "bg-green-50/60",
+              "text-green-700",
+              "dark:text-[rgb(6,52,42)]"
+            );
+          });
+          this.classList.add(
+            "active",
+            "bg-green-100/80",
+            "text-green-800",
+            "dark:text-[rgb(6,52,42)]"
+          );
+          this.classList.remove(
+            "bg-green-50/60",
+            "text-green-700",
+            "dark:text-[rgb(6,52,42)]"
+          );
+
+          updateFilters();
+        });
+      });
+    });
+  </script>
+</BaseLayout>
