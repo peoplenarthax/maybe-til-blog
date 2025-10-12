@@ -1,0 +1,144 @@
+---
+title: "Problem Solving: Problems in the Unknown"
+description: "What do you do when you have no idea where to start? Learn the three phases of tackling unfamiliar problems: Experiment, Research, and Experts."
+pubDate: 2024-12-05
+tags: ["problem-solving", "learning", "debugging"]
+contentType: "post"
+series: "Problem Solving"
+seriesOrder: 4
+---
+
+So far in this series we've learned [why questions matter](/blog/problem-solving-01-introduction), [how to provide context](/blog/problem-solving-02-the-context), and [how to communicate intention](/blog/problem-solving-03-the-intention). But what happens when you don't even know what questions to ask? When you're staring at a problem in completely unfamiliar territory?
+
+Welcome to **Problems in the Unknown**.
+
+## The Comfort of the Known
+
+Whilst we wish that most of the problems happen in a known area - an area where we are comfortable and we are able to navigate it because it's like our "mess", it may hide an amount of chaotic parts but over time we have learnt to untangle things (most likely because we have faced problems and we needed to start somewhere :P). 
+
+I see it at work every day. Whenever I ask a colleague for a feature in a project that they recently touched, they will smile, stretch their knuckles and show me the way. Is it possible that there is even a bit of pride in all this? Yes! And it is not wrong - probably this area was something magical to them sometime ago and now, "Thanks to Science" they control the gods and their will. 
+
+But reality doesn't always play this way.
+
+## Navigating the Unknown
+
+More often than not, we won't know the problem. If we are lucky we may "believe", we may have the "intuition", but even sometimes that is not enough. Depending on the issue we have several ways to start becoming familiar with the problem: **Experiments**, **Research**, **Experts**. 
+
+Even though not all problems will necessarily have 3 well-limited phases, as I describe each of them it will become more obvious that we want to move from experiments (which is dealing with issues while blind or in a black box-like situation), to start naming the behaviours we see and research for them in a common area, to finally create expertise out of it so that whenever possible, we can treat this information as the expert.
+
+Think of it as a journey from complete darkness to full illumination. You don't need to complete all three phases for every problem, but understanding where you are in this journey helps you know what to do next.
+
+## Phase 1: Experiment
+
+Experiments are there when you don't know where to start finding answers, there is nothing to research, nor to ask questions to. We got our problem in the shape of a "black box" - we can play with the parameters trying to observe the changes in behaviour, we can read some code and try to follow the logic, but no answers. 
+
+The whole point of running experiments is to **gather data to start**. Ideally when running experiments we know what the expected outcome is, otherwise it is part of the research to understand what "normality" means in that case.
+
+### Example: The Mysterious Crash
+
+**Situation:** Your application is crashing randomly. You don't know why, when, or under what conditions. You have no error messages, no patterns, nothing.
+
+**Experimenting:**
+- Does it crash with 10 users? With 100? With 1000?
+- Does it crash after 5 minutes? 50 minutes? 5 hours?
+- Does it crash when Feature X is enabled? Disabled?
+- What does the memory usage look like? CPU? Network?
+- Does it happen on all servers or just specific ones?
+- Can you crash it deliberately by doing something specific?
+
+Each experiment gives you data points. None of them alone solve the problem, but together they start painting a picture. You might discover: "It only crashes after 2 hours with more than 500 concurrent users on servers with less than 8GB RAM."
+
+Congratulations! You've moved from "it crashes randomly" to "it crashes under specific conditions." That's progress.
+
+### Tips for Effective Experimentation
+
+**Change one variable at a time:** If you change multiple things, you won't know which one made the difference.
+
+**Document everything:** Write down what you tried and what happened. Your future self will thank you.
+
+**Look for patterns:** After several experiments, step back and look for commonalities.
+
+**Ask people with similar knowledge:** Sometimes others have observed things you haven't. Asking colleagues "Have you noticed any patterns?" is still experimenting - you're gathering more data points.
+
+Asking people that have the same knowledge as you but maybe some more observations could also be considered experimenting, as you are just getting more data in order to start explaining some behaviours. Experimenting can sometimes be mixed with research, as it is weird we start from 0 to solve an issue.
+
+## Phase 2: Research
+
+The moment when we start seeing certain behaviours or we can name and explain a phenomenon is what I call the research phase. 
+
+For example, it is quite common to search for medical definitions and suggestions: "what could be the cause of rashes". It starts from the observation of our skin in contact with different things. Once we observe and we create some correlation, is when we start researching for plausible causes / solutions to it.
+
+Here the effectiveness will depend on how many things you can correlate when looking for a cause. It is not the same to get rashes spontaneously, than to get them when in nature. Also it is not the same to get rashes when you swim in the water than when you touch a certain plant. When we observe enough things it is more likely that the "common search space" reflects causality tied to specific situations.
+
+### Example: The Mysterious Crash (continued)
+
+After experiments you notice:
+- It always crashes when memory usage hits 8GB
+- It happens more frequently when processing images
+- The error logs mention "OutOfMemoryError"
+- It started after updating the image processing library
+
+Now you can research! You search for:
+- "OutOfMemoryError image processing"
+- "Memory leaks image libraries"
+- "JVM heap size configuration"
+- "[Library Name] memory issues"
+- "[Library Name] version X.Y.Z known issues"
+
+You're no longer shooting in the dark - you have specific terms and patterns to investigate. You can read GitHub issues, Stack Overflow threads, documentation. You're building a mental model of what's happening.
+
+### When Researching, Focus On
+
+**Scoping down the problem:** Every search should make your question more specific. Start with "website is slow" → "React app is slow" → "React app re-renders too much" → "React component X causes unnecessary re-renders on prop change"
+
+**Finding nomenclature:** Sometimes you just need the right word. Is it a "race condition"? A "memory leak"? A "deadlock"? Once you have the name, you can search for solutions. When doing software, sometimes getting a more specific error message is a good start.
+
+**Building a knowledge map:** As you research, you're not just looking for the solution - you're learning how the system works. This knowledge helps you [ask better questions](/blog/problem-solving-01-introduction) and provide better [context](/blog/problem-solving-02-the-context).
+
+## Phase 3: Experts
+
+When I talk about experts I talk about a figure that we actually know and that we can reach out to for help. My colleagues can act as experts for me, but also a book can assume the role of an expert and even our own notes / documentation about something. The important feature of the expert is that we know it and we can reach out to it at will.
+
+Maybe with humans the "reach out to it at will" is a bit fuzzy - people go on vacations, people can decide not to answer - but like in some fantastical world, let's assume that by knowing the name of it, we can summon it.
+
+### Example: The Mysterious Crash (final phase)
+
+You found through research that this is a known issue with the image processing library you're using. Now you can:
+- Ask a colleague who has worked with this library before
+- Check the library's official documentation and GitHub issues
+- Consult Stack Overflow threads from others who faced the same issue  
+- Review your own notes if you've dealt with this before (you ARE documenting your learnings, right?)
+- Reach out to the library maintainers or community
+
+### Making the Most of Experts
+
+**Prepare your question:** Use everything from [The Context](/blog/problem-solving-02-the-context) and [The Intention](/blog/problem-solving-03-the-intention). Experts can help you faster when you provide good questions.
+
+**Learn the terminology:** If I could prioritise one thing, it is that each time we reach out looking for help from the expert, we familiarise ourselves with the terminology. The power of naming things! This helps you search better next time.
+
+**Understand the big picture:** Focus more on understanding the overall picture than the specific details. Details can be learned through research / experimentation later.
+
+**Build your own expertise:** Take notes. Write documentation. Create runbooks. Next time this happens, YOU become the expert.
+
+## The Cycle Continues
+
+Notice how these three phases aren't always linear? You might:
+- Experiment → find something → research it → discover you need more experiments
+- Research something → realize you need an expert → expert suggests new experiments
+- Ask an expert → they give you something to research → you experiment based on what you learned
+
+This is normal! Problem solving is [iterative](/blog/problem-solving-05-iterating-through-problems), not linear. The key is recognizing which phase you're in and using the right approach for that phase.
+
+And always remember: every expert was once in the experiment phase, fumbling in the dark. The unknown only stays unknown until you start exploring it.
+
+---
+
+**Previous in the series:**
+- [Introduction & Why Questions Matter](/blog/problem-solving-01-introduction)
+- [The Context](/blog/problem-solving-02-the-context)
+- [The Intention](/blog/problem-solving-03-the-intention)
+
+**Next in the series:** [Iterating Through Problems](/blog/problem-solving-05-iterating-through-problems) - How to make steady progress without getting stuck
+
+**PS:** Eat your veggies 🌱
+

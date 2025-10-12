@@ -17,15 +17,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p class="text-lg text-text-light/80 dark:text-text-dark mb-6">
           I am <strong class="text-text-light dark:text-primary-100"
             >Angel Paredes</strong
-          >, based in <strong class="text-text-light dark:text-primary-100"
-            >Spain</strong
-          > and working at <strong class="text-text-light dark:text-primary-100"
+          >, an Engineering Manager based in <strong
+            class="text-text-light dark:text-primary-100">Madrid</strong
+          >, working at <strong class="text-text-light dark:text-primary-100"
             >Datadog</strong
-          >.
+          > within the Test Optimization team. I help teams build better software
+          and believe that soft skills are just as important as technical ones.
         </p>
 
         <button
-          id="tell-me-more-btn"
+          id="tell-me-more-btn-1"
           class="inline-flex items-center px-6 py-3 bg-primary-600/80 dark:bg-primary-500/80 text-white rounded-lg hover:bg-primary-700/80 dark:hover:bg-primary-600/80 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mb-6"
         >
           Tell me more
@@ -43,10 +44,91 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </svg>
         </button>
 
-        <div id="additional-info" class="hidden">
+        <div id="additional-info-1" class="hidden">
           <p
-            id="typewriter-text"
-            class="text-lg text-text-light/80 dark:text-text-dark leading-relaxed"
+            id="typewriter-text-1"
+            class="text-lg text-text-light/80 dark:text-text-dark leading-relaxed mb-6"
+          >
+          </p>
+        </div>
+
+        <button
+          id="tell-me-more-btn-2"
+          class="hidden inline-flex items-center px-6 py-3 bg-primary-600/80 dark:bg-primary-500/80 text-white rounded-lg hover:bg-primary-700/80 dark:hover:bg-primary-600/80 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mb-6"
+        >
+          The education journey
+          <svg
+            class="ml-2 w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <div id="additional-info-2" class="hidden">
+          <p
+            id="typewriter-text-2"
+            class="text-lg text-text-light/80 dark:text-text-dark leading-relaxed mb-6"
+          >
+          </p>
+        </div>
+
+        <button
+          id="tell-me-more-btn-3"
+          class="hidden inline-flex items-center px-6 py-3 bg-primary-600/80 dark:bg-primary-500/80 text-white rounded-lg hover:bg-primary-700/80 dark:hover:bg-primary-600/80 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mb-6"
+        >
+          The career path
+          <svg
+            class="ml-2 w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <div id="additional-info-3" class="hidden">
+          <p
+            id="typewriter-text-3"
+            class="text-lg text-text-light/80 dark:text-text-dark leading-relaxed mb-6"
+          >
+          </p>
+        </div>
+
+        <button
+          id="tell-me-more-btn-4"
+          class="hidden inline-flex items-center px-6 py-3 bg-primary-600/80 dark:bg-primary-500/80 text-white rounded-lg hover:bg-primary-700/80 dark:hover:bg-primary-600/80 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mb-6"
+        >
+          Beyond the 9-to-5
+          <svg
+            class="ml-2 w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <div id="additional-info-4" class="hidden">
+          <p
+            id="typewriter-text-4"
+            class="text-lg text-text-light/80 dark:text-text-dark leading-relaxed mb-6"
           >
           </p>
         </div>
@@ -56,14 +138,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const button = document.getElementById("tell-me-more-btn");
-      const additionalInfo = document.getElementById("additional-info");
-      const typewriterText = document.getElementById("typewriter-text");
+      const buttons = [
+        document.getElementById("tell-me-more-btn-1"),
+        document.getElementById("tell-me-more-btn-2"),
+        document.getElementById("tell-me-more-btn-3"),
+        document.getElementById("tell-me-more-btn-4"),
+      ];
 
-      if (!button || !additionalInfo || !typewriterText) return;
+      const contents = [
+        document.getElementById("additional-info-1"),
+        document.getElementById("additional-info-2"),
+        document.getElementById("additional-info-3"),
+        document.getElementById("additional-info-4"),
+      ];
 
-      const fullText =
-        'Passionate Engineering Manager at Datadog, mentoring aspiring engineers and advocating for the importance of soft skills in achieving success. Sometimes I like to define myself as "proud holistic hobbyist".';
+      const textElements = [
+        document.getElementById("typewriter-text-1"),
+        document.getElementById("typewriter-text-2"),
+        document.getElementById("typewriter-text-3"),
+        document.getElementById("typewriter-text-4"),
+      ];
+
+      if (!buttons[0] || !contents[0] || !textElements[0]) return;
+
+      const texts = [
+        'I like to define myself as a "proud holistic hobbyist" - I spend my free time painting, rollerblading, practicing judo and weightlifting, playing volleyball, birdwatching, taking photos, dancing, writing, and reading. I never have enough time for all my hobbies, making me a true jack of all trades, master of none. And I\'m perfectly fine with that.',
+
+        "I studied Communication Systems Engineering (telematics specialty) at Universidad Politécnica de Madrid. During university, I was an active student - I got involved with the student union, founded a student club as part of the Firefox Ambassador Program, and participate on the Microsoft Student Program. I organized hackathons and drove activities across the campus. Then I did my Erasmus at Mälardalen University in Västerås, Sweden, where I was part of the international committee taking care of other Erasmus students. There, I wrote my thesis on genetic algorithms for action planning for distributed autonomous underwater vehicles. After that, I started the Europhotonics Master Program - a triple diploma in Photonics Engineering across Marseille, Karlsruhe, and Barcelona ICFO, covering biomedical imaging, quantum optics, laser optics, and nanophotonics. But close to finishing my master thesis, I discovered something important: academia wasn't for me. What I truly enjoyed, what made me excited to wake up every morning, was software engineering.",
+
+        "My professional journey started at Kambi, a sportsbook provider company that computed bets and offered embedded experiences for customers. Shortly after, I joined PayPal in the business credit team, where I became a Tech Lead. I led the micro frontends migration, owned the GraphQL Apollo Federation architecture, and delivered core features for credit experiences including dashboards and credit simulations. I also drove the integration with PayPal's Business Credit unit, defined the engineering roadmap, evolved team processes, and mentored engineers. When COVID hit, I decided to return to Spain and joined Glovo as a Staff Software Engineer in the Logistics as a Service team, where I also became an Engineering Manager. At Glovo, I led the cross-functional On-Demand Experiences team, delivering eCommerce integrations, core application pages, and last-mile delivery products. I also led the Admin Platform - Glovo's largest monorepo with over 90 contributors across 15+ product domains - where I standardized internal tooling like micro frontends and workflows across teams. I drove Social Impact initiatives as lead engineer within the logistics domain and was the Frontend lead at the interview committee, leading efforts to streamline the hiring process. I was also a project lead for Glovo's hackathon across several editions. Now at Datadog, I lead the Test Optimization team, continuing to bridge technical excellence with people leadership.",
+
+        "Beyond my day job, I've spent time as a freelancer for small companies, doing quick prototypes and helping shape the first technical teams for startups that were just getting off the ground. I also offer mentoring online - I've helped people grow into senior software engineering roles and supported others through career switches into tech. Teaching has always been a passion of mine. I've given lessons in different schools, most recently at a bootcamp called Factoría F5, and I've also taught at universities. I've given several talks, mostly in Spanish, because I genuinely enjoy sharing what I know and learning from others in the process. I believe soft skills are as critical as technical ones - whether it's leading teams, mentoring engineers, or teaching, I'm passionate about helping others grow and succeed. This blog is part of that mission: sharing what I learn about problem-solving, interviewing, learning, and all the messy, human parts of building software and working with people.",
+      ];
 
       function typeWriter(text: string, element: HTMLElement, speed = 20) {
         element.innerHTML = "";
@@ -80,7 +186,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         type();
       }
 
-      button.addEventListener("click", function () {
+      function showContent(
+        button: HTMLElement,
+        nextButton: HTMLElement | null,
+        content: HTMLElement,
+        textElement: HTMLElement,
+        text: string
+      ) {
         // Hide the button with fade out
         button.style.transition = "opacity 0.2s ease, transform 0.2s ease";
         button.style.opacity = "0";
@@ -92,23 +204,58 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
         // Show the additional info div with a smooth slide down
         setTimeout(() => {
-          additionalInfo.classList.remove("hidden");
-          additionalInfo.style.opacity = "0";
-          additionalInfo.style.transform = "translateY(-20px)";
+          content.classList.remove("hidden");
+          content.style.opacity = "0";
+          content.style.transform = "translateY(-20px)";
 
           // Animate the container appearance
           setTimeout(() => {
-            additionalInfo.style.transition =
-              "opacity 0.3s ease, transform 0.3s ease";
-            additionalInfo.style.opacity = "1";
-            additionalInfo.style.transform = "translateY(0)";
+            content.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+            content.style.opacity = "1";
+            content.style.transform = "translateY(0)";
           }, 50);
 
-          // Start typewriter effect after container animation
+          // Start typewriter effect
           setTimeout(() => {
-            typeWriter(fullText, typewriterText);
+            typeWriter(text, textElement);
+
+            // Show next button if it exists
+            if (nextButton) {
+              setTimeout(
+                () => {
+                  nextButton.classList.remove("hidden");
+                  nextButton.style.opacity = "0";
+                  nextButton.style.transform = "translateY(-10px)";
+                  setTimeout(() => {
+                    nextButton.style.transition =
+                      "opacity 0.3s ease, transform 0.3s ease";
+                    nextButton.style.opacity = "1";
+                    nextButton.style.transform = "translateY(0)";
+                  }, 50);
+                },
+                text.length * 20 + 300
+              );
+            }
           }, 350);
         }, 100);
+      }
+
+      // Set up click handlers for each button
+      buttons.forEach((button, index) => {
+        if (button && contents[index] && textElements[index]) {
+          button.addEventListener("click", function () {
+            const nextButton = buttons[index + 1] || null;
+            if (button && contents[index] && textElements[index]) {
+              showContent(
+                button,
+                nextButton,
+                contents[index],
+                textElements[index],
+                texts[index]
+              );
+            }
+          });
+        }
       });
     });
   </script>

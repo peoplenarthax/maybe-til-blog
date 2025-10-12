@@ -1,0 +1,225 @@
+---
+title: "Problem Solving: The Right Amount of Context"
+description: "How deep should you go? Learn to recognize when you have enough context to solve your problem vs. when you're falling down a rabbit hole."
+pubDate: 2025-07-28
+tags: ["problem-solving", "learning", "productivity"]
+contentType: "post"
+series: "Problem Solving"
+seriesOrder: 6
+---
+
+Throughout this series we've learned [why questions matter](/blog/problem-solving-01-introduction), [how to provide context](/blog/problem-solving-02-the-context), [how to communicate intention](/blog/problem-solving-03-the-intention), [how to navigate unknown territory](/blog/problem-solving-04-problems-in-the-unknown), and [how to iterate through problems](/blog/problem-solving-05-iterating-through-problems).
+
+But here's a question I get asked a lot: **"How deep should I go?"**
+
+## The Rabbit Hole is Real
+
+As we saw in [iterating through problems](/blog/problem-solving-05-iterating-through-problems), this whole problem discovery process is quite intricate. A lot of times it requires going back and forth, which means that there is a cyclical component in most of the steps and with it, the risk of getting stuck in an infinite loop.
+
+I would be specifically careful while [researching for the problem](/blog/problem-solving-04-problems-in-the-unknown). It won't be the first time someone starts having a doubt on mathematics and went down the spiral to understand the low level of the operations they need to do, when most of times to solve the actual problem they could use the higher level tools they have (e.g. integrals).
+
+Or when we want to know a bit more about a certain political / historical topic and we go down the [Wikipedia infinite loop](https://en.wikipedia.org/wiki/Wiki_rabbit_hole) - you start reading about the Roman Empire and three hours later you're deep into the mating habits of Byzantine silk worms.
+
+**In software, this looks like:**
+- Starting with "Why is this React component slow?" 
+- Going to "How does React reconciliation work?"
+- Then "How does the Virtual DOM diffing algorithm work?"
+- Then "What are the time complexity trade-offs of different tree diffing algorithms?"
+- Then "How do B-trees compare to red-black trees?"
+- And now you're three hours deep in data structures textbooks and your component is still slow.
+
+## The Goldilocks Problem
+
+The answer to "what is the right amount of context?" is once again: **it depends**. 
+
+For those who have a great natural instinct for time, they may realise that they have gone way too deep for too long. For those who don't, like me, I have certain "rules" that help me with it.
+
+The challenge is that you can have:
+- **Too little context:** You're shooting in the dark, wasting time with random experiments
+- **Too much context:** You're spending days learning theory when you just need to fix a bug
+- **Just right:** You have enough understanding to make progress and solve your immediate problem
+
+Let's explore how to find that sweet spot.
+
+## How Much Knowledge Is Enough?
+
+A good rule of thumb: **You have enough context when you can explain the problem to someone else and they can reproduce or understand it.**
+
+This aligns perfectly with what we learned about [providing context](/blog/problem-solving-02-the-context) when asking questions. If you can clearly articulate:
+- What the problem is
+- When and where it happens
+- What the expected behavior is
+- What you've tried so far
+
+Then you probably have enough context to either solve it yourself or get effective help from others.
+
+### The Three Levels Test
+
+**Too shallow:** "The website is broken"
+- You can't reproduce it
+- You don't know what "broken" means
+- You have no idea where to start
+
+**Just right:** "The website throws a 500 error when users try to upload images larger than 5MB because our image processing service runs out of memory"
+- You can reproduce it
+- You know the conditions
+- You understand the immediate cause
+- You can start investigating solutions
+
+**Too deep:** "The website fails because the JVM garbage collector uses a mark-and-sweep algorithm which has a stop-the-world phase that creates latency spikes when processing large objects, and since our image processing creates intermediate byte arrays that exceed the young generation size, they're promoted to the old generation which triggers a full GC cycle..."
+- You've gone from solving the problem to understanding the entire computer science theory behind it
+- You could write a PhD thesis on this
+- Your immediate problem still isn't solved
+
+## Do You Need to Understand Everything?
+
+Not usually! **Understanding the abstraction layer you're working on is often enough.**
+
+Think of it like driving a car:
+- To drive: You need to know how to use the pedals, steering wheel, and mirrors
+- To solve common issues: You might need to know how to check oil and tire pressure
+- To be a mechanic: You need to understand engines, transmissions, electrical systems
+- To be an automotive engineer: You need to understand thermodynamics, materials science, etc.
+
+**In software:**
+- You don't need to know how TCP/IP works to debug a REST API
+- You don't need to understand assembly to fix a JavaScript bug
+- You don't need to master database internals to write a good SQL query
+- You don't need to know how the V8 engine works to use React
+
+**However...** if you keep hitting the same type of problem, it might be time to go deeper.
+
+### When to Go Deeper
+
+**Signals that you should go deeper:**
+- You keep hitting the same problem repeatedly
+- Your solutions feel like band-aids
+- You're cargo-culting code without understanding it
+- You need to make architectural decisions
+- You're debugging performance issues that require system-level thinking
+
+**Example:** If you're constantly debugging memory issues, maybe it's time to learn about memory management. If authentication bugs keep appearing, dive into OAuth and JWT. If you're always confused by async behavior, study the event loop.
+
+The key is to be intentional about when you go deep. Ask yourself: 
+
+**"Will understanding this help me solve THIS problem, or will it help me solve FUTURE problems?"**
+
+Both are valid! But recognize which one you're doing:
+- **Solving this problem:** Stay focused, go deep enough to fix it, move on
+- **Investing in future knowledge:** Acknowledge you're taking time to learn, set boundaries, make it worth it
+
+## Practical Rules for Knowing When to Stop
+
+### Rule 1: The Two-Level Rule
+
+When investigating something, go **at most two levels deeper** than where you started.
+
+**Example:**
+- Level 0: "Why is my page slow?"
+- Level 1: "The API call takes 5 seconds" ← Investigate here
+- Level 2: "The database query is slow" ← Investigate here
+- Level 3: "The index structure is suboptimal" ← Probably stop here for now
+- Level 4: "B-tree vs LSM tree trade-offs" ← You've gone too far
+
+Unless your job is to be a database expert, you probably don't need level 4 to solve your immediate problem.
+
+### Rule 2: The Time Box
+
+Set a time limit for how deep you'll go.
+
+"I'll spend 30 minutes understanding how this library works, then I'll make a decision with what I know."
+
+If you can't make progress after the time box:
+- You might need to go deeper (but consciously choose to)
+- You might need to ask an expert
+- You might need to try a different approach
+
+### Rule 3: The Abstraction Test
+
+Ask yourself: **"If I treat this as a black box, can I still solve my problem?"**
+
+- ✅ "I don't need to know how JSON.parse() works internally, I just need to use it"
+- ✅ "I don't need to know how HTTPS encryption works, I just need to configure it"
+- ❌ "I can't debug this performance issue without understanding how React's reconciliation works"
+- ❌ "I can't fix this security vulnerability without understanding how authentication tokens work"
+
+### Rule 4: The Explain to Someone Else Test
+
+If you can explain the problem and your approach to:
+- A rubber duck
+- A colleague  
+- A non-technical friend (using analogies)
+
+Then you probably understand it well enough to make progress. If you can't explain it clearly, you might either:
+- Not have enough context yet (go deeper)
+- Have too much context and lost the forest for the trees (zoom back out)
+
+## The Wikipedia Trap
+
+We've all been there. You start researching one thing, click a link, then another link, then another...
+
+**Protection strategies:**
+
+**Use the tab limit trick:** Open max 5 tabs. If you need to open a 6th, close one of the existing ones. This forces you to prioritize what's actually relevant.
+
+**Use breadcrumbs:** Keep a text file or note with:
+```
+Original problem: Page is slow
+→ Found: API call is slow  
+→ Found: Database query takes 3s
+→ Currently investigating: Why is the query slow?
+```
+
+This helps you remember what you're actually trying to solve.
+
+**Set a timer:** "I'll spend 20 minutes researching this, then I'll summarize what I learned and decide next steps."
+
+**Ask yourself frequently:** "Am I learning this to solve my problem, or because it's interesting?"
+
+Both are fine! But if it's the latter, maybe save it for later. Bookmark it. Add it to your "to learn" list. But don't let it derail your current problem-solving session.
+
+## The Balance
+
+The goal isn't to never go deep. Deep understanding is valuable. The goal is to go deep *intentionally* and *appropriately*.
+
+**Signs you have the right balance:**
+- You can make progress on your problem
+- You understand *why* your solution works
+- You're not copy-pasting code you don't understand
+- You're also not spending weeks learning theory when you need to ship
+- You know what you know, what you don't know, and what you don't need to know
+
+As you gain experience, you'll develop better intuition for this balance. You'll learn which rabbit holes are worth going down and which aren't. You'll recognize patterns faster and know when surface knowledge is sufficient vs. when you need deep expertise.
+
+Until then, use these rules as guardrails. They'll keep you moving forward while still building understanding.
+
+## Final Thoughts on the Series
+
+We've now covered the full journey of problem solving:
+1. [Understanding why questions matter](/blog/problem-solving-01-introduction) and that problems are relative to context
+2. [Providing context](/blog/problem-solving-02-the-context) that makes problems reproducible
+3. [Communicating intention](/blog/problem-solving-03-the-intention) to get the answers you need
+4. [Navigating unknown territory](/blog/problem-solving-04-problems-in-the-unknown) through experimentation, research, and experts
+5. [Iterating through problems](/blog/problem-solving-05-iterating-through-problems) and finding the real problem
+6. **Knowing when you have enough context** to move forward
+
+Problem solving isn't a linear process. You'll bounce between these concepts constantly. Sometimes you'll realize you need more context. Sometimes you'll realize you've been asking the wrong question. Sometimes you'll discover the real problem is entirely different from what you started with.
+
+And that's okay. That's the process. That's how everyone does it.
+
+The difference between good problem solvers and everyone else isn't that they never struggle or go down wrong paths. It's that they've built systems and habits - like the ones in this series - to help them struggle more effectively.
+
+Now go forth and solve problems. And remember: you don't need to know everything. You just need to know enough to take the next step.
+
+---
+
+**Full series:**
+1. [Introduction & Why Questions Matter](/blog/problem-solving-01-introduction)
+2. [The Context](/blog/problem-solving-02-the-context)
+3. [The Intention](/blog/problem-solving-03-the-intention)
+4. [Problems in the Unknown](/blog/problem-solving-04-problems-in-the-unknown)
+5. [Iterating Through Problems](/blog/problem-solving-05-iterating-through-problems)
+6. **The Right Amount of Context** (you are here)
+
+**PS:** Eat your veggies 🌱
+

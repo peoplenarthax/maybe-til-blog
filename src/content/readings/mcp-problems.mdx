@@ -1,0 +1,27 @@
+---
+title: "Everything Wrong with MCP"
+description: "The Model Context Protocol has security, UX, and LLM limitation issues that need formal standardization, particularly around access control and action criticality levels."
+pubDate: 2025-04-16
+tags: ["ai", "links/readings"]
+contentType: "reading"
+originalTitle: "Everything Wrong with MCP"
+originalAuthor: "Shrivu Shankar"
+originalUrl: "https://blog.sshh.io/p/everything-wrong-with-mcp"
+originalSite: "Shrivu's Substack"
+originalPubDate: 2025-04-13
+briefSummary: "While MCP has rapidly become the de-facto standard for integrating third-party data and tools with LLMs, it has significant issues in protocol security, LLM security, UI/UX, and fundamental LLM limitations that need addressing before widespread adoption."
+personalNotes: "There are some issues with MCPs that we need to make a formal standard on that protocol before adopting, eg: Protocol Security, LLM Security, UX/UI, limitations of LLMs. I think the main issue here is access control and how to determine for which agent what is the level of access / criticality of an action. Probably having a standard will be highly relevant here."
+keyTakeaways:
+  - "MCP has no concept of tool-risk levels or controls for action criticality"
+  - "Protocol security issues include authentication problems and local code execution risks"
+  - "No cost controls - token costs can escalate quickly with inefficient integrations"
+  - "Access control remains the main challenge: determining levels per agent"
+  - "LLM limitations negatively correlate with amount of instructional context"
+  - "Formal standardization needed before widespread adoption"
+readingTime: 15
+---
+
+## My Thoughts
+
+There are some issues with MCPs that we need to make a formal standard on that protocol before adopting, eg: Protocol Security, LLM Security, UX/UI, limitations of LLMs. I think the main issue here is access control and how to determine for which agent what is the level of access / criticality of an action. Probably having a standard will be highly relevant here.
+

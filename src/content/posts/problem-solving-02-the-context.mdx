@@ -1,0 +1,98 @@
+---
+title: "Problem Solving: The Context"
+description: "Everything that surrounds a question is part of its context. Learn how to provide the right information so others can reproduce and understand your problems."
+pubDate: 2024-06-10
+tags: ["problem-solving", "debugging", "communication"]
+contentType: "post"
+series: "Problem Solving"
+seriesOrder: 2
+---
+
+In the [previous post](/blog/problem-solving-01-introduction), we established that asking the right questions is fundamental to problem solving. Now let's dive into the first pillar of good questions: **The Context**.
+
+## What is Context?
+
+It often happens that someone asks you a question along the lines of "Is this feature broken?" and then you enter the mystery phase, that area where you need to capture all the parts that the question itself is missing: Which feature? Where are you watching? Are you doing any specific actions? Is it supposed to work like this or not? Basically you need to put yourself in the mind of the other person and see the problem as they see it.
+
+To say it simply, everything that surrounds the question is part of the context of it: the assumptions, the where and the when, the expected behaviour. If I could ask myself one question to easily know if I got the context right is: **Can I reproduce/observe the problem?**
+
+With all this it is easy to conclude that the best way of getting "The Context" right when asking questions is answering: **"What information do I need to provide so that the other person can reproduce/observe the problem?"**
+
+## Bring Your Problems to the Timespace
+
+Problems are complex and multidimensional. We could benefit by removing some of this dimensionality by scoping them in a "when and where". Imagine going to a doctor and telling them that you have problems breathing. Knowing if it happens all the time or only at wake up time, if it happens in nature or in the city, already removes some of the unknown from the question and searching for solutions becomes easier.
+
+In software it is the same - when and where information tells us about the cause-effect and the conditions where we can spot the issue. Adding information to the question in the shape of:
+- "When I do X..."
+- "In the job that is executed at 12pm..."
+- "In section C of the page..."
+- "The last deployment of service Z..."
+- "After the user clicks the submit button..."
+- "During peak hours between 2-4pm..."
+
+**Before:** "The website is slow"
+**After:** "The website takes 10+ seconds to load when users search for products during peak hours (2-4pm), but it's fast during off-peak times"
+
+See the difference? The second version gives someone investigating the problem a clear starting point: they know to check search functionality, they know when to observe it, and they have a baseline comparison.
+
+## Indicate What is the Normal State
+
+"It is not a bug, it is a feature" in its purest state. If we don't know how something should behave, even if it feels wrong (e.g. a crashing program), without understanding what the wanted behaviour is, we will fail to understand a problem. In software, the machine will run the code as we have written it (more or less, of course this depends on which level you write your code), so any behaviour has been specified by us or is there by default, even the crashes.
+
+When we know exactly the expected functionality, we can specify it so as not to let the person to whom we ask the question interpret freely what should be there.
+
+**Before:** "The calculator isn't working"
+**After:** "When I click the equals button I want it to show the sum of these two numbers (5 + 3 = 8), but instead it shows 53"
+
+**Before:** "The page looks weird"
+**After:** "The login form should be centered on the page with a white background, but instead it's aligned to the left with no background color"
+
+By stating what the normal state should be, you're providing a clear target. The person helping you knows exactly what success looks like.
+
+## Don't Forget Your Assumptions
+
+Human beings can be great at optimising context. In which way can we optimise it? Basically reducing the scope by filling some unknowns with some premises. We do this so that we have fewer things that we need to figure out, but it could be that these assumptions are wrong. 
+
+Whenever you add a presumption to a problem, be explicit about it so that the other person can also evaluate it and even at some point consider that the assumption was misdirecting.
+
+**Examples of stating assumptions:**
+- "When I do this action, I assumed that the setup for the other feature was done..."
+- "I imagine that all your users will want to X..."
+- "I'm assuming the database has been migrated to the new schema..."
+- "I presume the user is logged in when this happens..."
+
+Why is this important? Because often the problem IS the assumption. How many times have you debugged something for hours only to discover your assumption about how something works was wrong?
+
+## Putting It All Together
+
+Let's see how combining all these elements transforms a question:
+
+**Bad question (no context):**
+"Why isn't this working?"
+
+**Better question (some context):**
+"The user profile page shows an error"
+
+**Good question (full context):**
+"When I navigate to the user profile page at `/profile/123` (after logging in successfully), I expect to see the user's name, email, and avatar. Instead, I see a 500 error message saying 'Internal Server Error'. This started happening after yesterday's deployment. I'm assuming the user data exists in the database since I can see it in the admin panel."
+
+See how the last version gives someone all the information they need to:
+- Reproduce the problem (specific URL, specific conditions)
+- Understand what should happen (expected state)
+- Know when it started (timespace)
+- Validate or challenge assumptions (user data existence)
+
+When you provide this level of context, you're not just asking a question - you're inviting collaboration in solving the problem. And that's when magic happens.
+
+---
+
+**Previous in the series:** [Introduction & Why Questions Matter](/blog/problem-solving-01-introduction)
+
+**Next in the series:** [The Intention](/blog/problem-solving-03-the-intention) - Learn how to be clear about what kind of answer you're looking for.
+
+**Related in this series:**
+- [Problems in the Unknown](/blog/problem-solving-04-problems-in-the-unknown) - What to do when you don't have enough context yet
+- [Iterating Through Problems](/blog/problem-solving-05-iterating-through-problems) - How to gather context iteratively
+
+**PS:** Eat your veggies 🌱
+

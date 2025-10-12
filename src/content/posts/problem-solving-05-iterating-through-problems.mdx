@@ -1,0 +1,185 @@
+---
+title: "Problem Solving: Iterating Through Problems"
+description: "Problem solving is rarely linear. Learn how to make steady progress through iteration, and understand that the problem you start with might not be the real problem."
+pubDate: 2025-04-22
+tags: ["problem-solving", "methodology", "soft-skills"]
+contentType: "post"
+series: "Problem Solving"
+seriesOrder: 5
+---
+
+We've covered [asking the right questions](/blog/problem-solving-01-introduction), [providing context](/blog/problem-solving-02-the-context), [communicating intention](/blog/problem-solving-03-the-intention), and [navigating unknown territory](/blog/problem-solving-04-problems-in-the-unknown). Now let's talk about the messy reality of problem solving: **it's almost never linear**.
+
+## Problems Are Multidimensional
+
+As we mentioned in [asking the right questions](/blog/problem-solving-01-introduction), problems have a multidimensional nature. By now we should have some tools to scope it down, but this is more of an iterative process where every time we get closer to the reality, than a one-time exercise.
+
+Think of problem solving like peeling an onion. Each layer you remove reveals another layer underneath. Sometimes you discover that what you thought was the problem is actually just a symptom of a deeper issue. Sometimes you find that the problem has evolved while you were investigating it.
+
+This isn't a failure of your problem-solving process - this IS the problem-solving process.
+
+## Example: The Lost Metro Card
+
+Imagine you lost your metro card on your way to the office. How would you find it? Let's go through the mental process:
+
+### Iteration 1: Check the obvious first
+
+Probably the best thing is to check if you don't have it with you. Humans are made in a way where if we don't see enough problems, we will create them. I can swear it's not the first time I will claim I have lost something to immediately find it in my pocket.
+
+This is a **low energy action** that could save us an unneeded effort. Like if we are trying to sort a set of elements, and the first thing we do is check if we have elements to sort before investing in a strategy.
+
+**Cost:** 30 seconds
+**Value:** Potentially solves problem immediately
+
+### Iteration 2: Evaluate your current information
+
+Where is it more likely that you lost it? You lost it today, and you know it was used to access the metro. This helps us discard looking for it at home, on the way from home to the metro, and in any part of the world where you weren't today.
+
+**What changed:** We narrowed the search space from "anywhere in the universe" to "places I've been since using the card"
+
+### Iteration 3: Narrow down the timeline
+
+When could you have lost it? If like me, you keep your access card next to your phone or in your wallet, then it is more probable that it could drop while using your wallet. So we will look into those places first: the office in case I used my wallet for anything, any small shop I visited...
+
+**What changed:** We've gone from "places I've been" to "specific moments when I used my wallet"
+
+### Iteration 4: Assess cost vs. benefit
+
+If we don't find it in those places, we will check what is the next probable place. If we start seeing that it requires a lot of effort, we will compare it with the price of a new ticket / access card and buy it earlier.
+
+**What changed:** We've reframed the problem! It's no longer "Where is my card?" It's "What's the most efficient way to be able to use the metro again?"
+
+As you can see, even for a small problem, it required some iteration so that each time we have more information about it and this aids us to take better decisions.
+
+## The REAL Problem
+
+At this point I think it is worth mentioning that probably the first time we talked about the problem we thought that the problem was that we lost the card, when the REAL problem was **"How do I go back home using the metro?"**
+
+This happens ALL THE TIME in software:
+- We think the problem is "The website is slow" when the real problem is "Users are leaving before completing purchases"
+- We think the problem is "We need more servers" when the real problem is "Our queries are inefficient"
+- We think the problem is "This bug needs fixing" when the real problem is "We don't have tests to catch these bugs"
+
+Often, the problem you start with is a symptom. Through iteration, you discover the underlying cause. And sometimes, you discover that solving the underlying cause makes the original problem irrelevant.
+
+## The Iteration Pattern
+
+Here's a general pattern I follow when iterating through problems:
+
+### 1. Start with what you know
+
+Don't overthink the first step. Use the information you have right now. If you're [experimenting blindly](/blog/problem-solving-04-problems-in-the-unknown), start experimenting. If you have enough [context](/blog/problem-solving-02-the-context) to research, start researching.
+
+### 2. Take the lowest-cost action first
+
+Check your pockets before retracing your steps across the city. Restart the service before diving into code. Check if others are experiencing the issue before assuming it's your code.
+
+Quick wins are valuable, and even if they don't solve the problem, they give you information cheaply.
+
+### 3. Evaluate what you learned
+
+After each action, pause and ask:
+- What did I learn?
+- What does this eliminate?
+- What does this suggest?
+- What should I try next?
+
+This is where being [intentional](/blog/problem-solving-03-the-intention) helps. If you don't stop to evaluate, you might miss important signals.
+
+### 4. Adjust your approach
+
+Based on what you learned, adjust your next step. Maybe you need to [gather more context](/blog/problem-solving-02-the-context). Maybe you need to [consult an expert](/blog/problem-solving-04-problems-in-the-unknown). Maybe you need to reframe the entire problem.
+
+### 5. Know when to stop
+
+Sometimes the juice isn't worth the squeeze. If finding your metro card requires 3 hours of searching and a new card costs $5, buy the card. If fixing a bug that affects 0.01% of users requires a complete rewrite, maybe it's not worth it (or maybe the real problem is "why do we have brittle architecture?").
+
+## Iteration in Practice: Debugging a Production Issue
+
+Let's see this pattern in action:
+
+**Initial problem:** "Users are reporting errors on checkout"
+
+**Iteration 1 - Quick check:**
+- Check server health dashboard
+- Check error logs for the last hour
+- Result: No server issues, but seeing lots of "Payment gateway timeout" errors
+
+**Iteration 2 - Narrow scope:**
+- When did this start? → 2 hours ago
+- How many users affected? → About 30% of checkout attempts  
+- Which payment methods? → Only credit cards, not PayPal
+- Result: Started after a deployment, only affecting credit card payments
+
+**Iteration 3 - Investigate the change:**
+- What was deployed 2 hours ago? → Updated payment library version
+- Check library changelog → New version requires an additional API key
+- Result: We're missing configuration!
+
+**Iteration 4 - Fix and verify:**
+- Add missing API key to configuration
+- Deploy fix
+- Monitor for 30 minutes → Error rate drops to 0%
+- Result: Problem solved!
+
+**Iteration 5 - Prevent recurrence:**
+- Add automated tests for payment configuration
+- Update deployment checklist
+- Document this incident
+- Result: Made the system more robust
+
+Notice how each iteration:
+- Started with the information we had
+- Took a specific action
+- Learned something new
+- Adjusted the approach
+- Got us closer to solving the problem
+
+And notice how we went from "users are reporting errors" (a symptom) to "we need better deployment checks for third-party integrations" (a systemic improvement).
+
+## Avoiding Infinite Loops
+
+The danger of iteration is getting stuck in loops. You try something, it doesn't work, you try the same thing again slightly differently, still doesn't work, repeat...
+
+Signs you're in an infinite loop:
+- You've tried the same approach 3+ times with minimal variation
+- You can't articulate what you learned from the last attempt
+- You feel frustrated and are just "trying things"
+- You're not sure what success looks like anymore
+
+How to break out:
+- **Take a break:** Seriously. Walk away for 20 minutes. Your brain needs it.
+- **Talk to someone:** Rubber duck debugging or actual human conversation
+- **Go back to basics:** What are you actually trying to achieve? Re-read your [context](/blog/problem-solving-02-the-context) and [intention](/blog/problem-solving-03-the-intention)
+- **Try a completely different approach:** If you've been experimenting, try researching. If you've been researching, try asking an expert.
+- **Question your assumptions:** Maybe the thing you think is true isn't actually true
+
+This is where having [the right amount of context](/blog/problem-solving-06-right-amount-context) becomes crucial. Sometimes you're stuck because you don't have enough context. Sometimes you're stuck because you're drowning in irrelevant details.
+
+## Embrace the Mess
+
+Problem solving is messy. You'll go down wrong paths. You'll waste time on dead ends. You'll think you've found the solution only to discover you've found a different problem.
+
+This is normal. This is expected. This is how everyone does it.
+
+The difference between good problem solvers and bad problem solvers isn't that good ones never hit dead ends. It's that good ones:
+- Recognize dead ends faster
+- Learn from each iteration
+- Adjust their approach based on what they learn
+- Know when to ask for help
+- Document what they tried so they don't repeat mistakes
+
+Keep iterating. Keep learning. Keep moving forward. Even small steps forward are still forward.
+
+---
+
+**Previous in the series:**
+- [Introduction & Why Questions Matter](/blog/problem-solving-01-introduction)
+- [The Context](/blog/problem-solving-02-the-context)
+- [The Intention](/blog/problem-solving-03-the-intention)
+- [Problems in the Unknown](/blog/problem-solving-04-problems-in-the-unknown)
+
+**Next in the series:** [The Right Amount of Context](/blog/problem-solving-06-right-amount-context) - How to know when you have enough information vs. when you're going down rabbit holes
+
+**PS:** Eat your veggies 🌱
+

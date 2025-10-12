@@ -1,0 +1,26 @@
+---
+title: "useOptimistic and how it works internally"
+description: "React's useOptimistic hook enables optimistic UI updates for async actions, though its internal complexity and connection to concurrent mode raises questions about error handling and state reversion."
+pubDate: 2024-10-15
+tags: ["frontend", "links/readings"]
+contentType: "reading"
+originalTitle: "useOptimistic"
+originalAuthor: "React Team & JSer"
+originalUrl: "https://react.dev/reference/react/useOptimistic"
+originalSite: "React Documentation"
+originalPubDate: 2024-03-20
+briefSummary: "React's useOptimistic hook manages state dependent on async actions, enabling optimistic rendering before action completion. The hook's complexity stems from its integration with concurrent mode, raising questions about error detection and state reversion mechanisms."
+personalNotes: "Not sure I 100% understand how it works underneath, it seems like a way of managing a state that depends on async actions, that does the optimistic rendering of a new state. But I have a lot of open questions about how it detect errors, how does it revert… They recommend to wait to use this until some library uses it. All the things that had to do with the concurrent mode are potentially dangerous."
+keyTakeaways:
+  - "Manages state for optimistic UI updates during async operations"
+  - "Internal implementation relies heavily on React's concurrent mode"
+  - "Error detection and state reversion mechanisms remain unclear"
+  - "Recommended to wait for library adoption before direct use"
+  - "Concurrent mode features can be dangerous without proper understanding"
+readingTime: 10
+---
+
+## My Thoughts
+
+Not sure I 100% understand how it works underneath, it seems like a way of managing a state that depends on async actions, that does the optimistic rendering of a new state. But I have a lot of open questions about how it detect errors, how does it revert… They recommend to wait to use this until some library uses it. All the things that had to do with the concurrent mode are potentially dangerous.
+
