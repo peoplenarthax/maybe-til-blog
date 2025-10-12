@@ -21,7 +21,6 @@ const {
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-  <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,18 +49,66 @@ const {
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-    <!-- JSON-LD Schema -->
+    <!-- Author and Site Meta -->
+    <meta name="author" content="Angel Paredes" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="alternate" type="application/rss+xml" title="Angel Paredes RSS Feed" href="/rss.xml" />
+    <link rel="author" type="text/plain" href="/humans.txt" />
+    
+    <!-- Additional Meta for GEO (Generative Engine Optimization) -->
+    <meta name="keywords" content="software engineering, engineering management, problem solving, frontend development, React, TypeScript, team leadership, career development, learning" />
+    <meta property="article:author" content="Angel Paredes" />
+    <meta name="twitter:creator" content="@peoplenarthax" />
+    
+    <!-- JSON-LD Schema for Person -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Angel Paredes",
+        "alternateName": "Angel Paredes Barato",
         "url": "https://angelpared.es",
-        "jobTitle": "Software Developer",
+        "image": "https://angelpared.es/og-image.jpg",
+        "jobTitle": "Engineering Manager",
+        "description": "Engineering Manager and holistic learnaholic. I write about problem-solving, software engineering, management, and the human side of building software.",
+        "knowsAbout": ["Software Engineering", "Engineering Management", "Problem Solving", "Frontend Development", "Team Leadership", "Micro Frontends", "React", "JavaScript", "TypeScript"],
         "sameAs": [
           "https://github.com/peoplenarthax",
           "https://linkedin.com/in/angelpbarato"
-        ]
+        ],
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Universidad Politécnica de Madrid"
+          }
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Datadog"
+        }
+      }
+    </script>
+
+    <!-- JSON-LD Schema for Website -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Angel Paredes",
+        "alternateName": "angelpared.es",
+        "url": "https://angelpared.es",
+        "description": "Personal blog about software engineering, management, problem-solving, and learning.",
+        "author": {
+          "@type": "Person",
+          "name": "Angel Paredes"
+        },
+        "inLanguage": "en-US",
+        "copyrightYear": new Date().getFullYear(),
+        "copyrightHolder": {
+          "@type": "Person",
+          "name": "Angel Paredes"
+        }
       }
     </script>
 
@@ -110,9 +157,10 @@ const {
             <div class="flex items-center">
               <a
                 href="/"
-                class="text-xl font-bold text-accent-500 dark:text-primary-100 hover:text-accent-600 dark:hover:text-primary-200 transition-colors"
+                class="flex items-center space-x-2 text-xl font-bold text-accent-500 dark:text-primary-100 hover:text-accent-600 dark:hover:text-primary-200 transition-colors"
               >
-                Angel Paredes
+                <span class="text-2xl">🧃</span>
+                <span>Angel Paredes</span>
               </a>
             </div>
             <div class="flex items-center space-x-8 md:mr-16 lg:mr-20">

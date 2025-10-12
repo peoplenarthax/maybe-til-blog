@@ -1,0 +1,26 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Optimize for AI/LLM crawlers (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://angelpared.es/sitemap-index.xml
+

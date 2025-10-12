@@ -1,0 +1,28 @@
+/* TEAM */
+Name: Angel Paredes
+Role: Author, Engineer, Creator
+Location: Madrid, Spain
+Contact: https://angelpared.es
+GitHub: https://github.com/peoplenarthax
+LinkedIn: https://linkedin.com/in/angelpbarato
+
+/* SITE */
+Standards: HTML5, CSS3, JavaScript (ES2023+)
+Components: Astro, React, Tailwind CSS, MDX
+Language: English
+Doctype: HTML5
+IDE: Cursor
+
+/* ABOUT */
+This is a personal blog about software engineering, problem-solving, 
+management, and the human side of building software. Written by an 
+Engineering Manager who believes soft skills are as important as 
+technical ones.
+
+Topics: Software Engineering, Problem Solving, Engineering Management, 
+Frontend Development, Learning, Interviewing, Career Development
+
+/* THANKS */
+Built with Astro - https://astro.build
+Inspired by great bloggers who share their knowledge freely
+
