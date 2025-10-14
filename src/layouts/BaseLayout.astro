@@ -21,6 +21,34 @@ const {
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
+  <head>
+    <!-- Theme initialization script (MUST be first to prevent FOUC) -->
+    <script is:inline>
+      // Execute immediately before ANY styles or content load
+      (function () {
+        const getStoredTheme = () => {
+          try {
+            return localStorage.getItem("theme");
+          } catch (e) {
+            return null;
+          }
+        };
+        const getSystemPreference = () =>
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        
+        // Use stored theme, fallback to system preference
+        const theme = getStoredTheme() || getSystemPreference();
+
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -110,26 +138,6 @@ const {
           "name": "Angel Paredes"
         }
       }
-    </script>
-
-    <!-- Theme initialization script (must be in head to prevent FOUC) -->
-    <script is:inline>
-      // Immediately apply theme to prevent flash (defaults to dark mode)
-      (function () {
-        const getStoredTheme = () => localStorage.getItem("theme");
-        const getSystemPreference = () =>
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-        // Default to dark mode unless explicitly set to light
-        const theme = getStoredTheme() || "dark";
-
-        if (theme === "dark") {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-      })();
     </script>
 
     <!-- Preload critical fonts -->
