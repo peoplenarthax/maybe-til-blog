@@ -49,6 +49,35 @@ const {
       })();
     </script>
 
+    <!-- Service Worker Cleanup Script -->
+    <script is:inline>
+      // Unregister any existing service workers and clear caches
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration of registrations) {
+            registration.unregister().then(function(success) {
+              if (success) {
+                console.log('Old service worker unregistered successfully');
+              }
+            });
+          }
+        });
+
+        // Clear all caches
+        if ('caches' in window) {
+          caches.keys().then(function(cacheNames) {
+            return Promise.all(
+              cacheNames.map(function(cacheName) {
+                return caches.delete(cacheName);
+              })
+            );
+          }).then(function() {
+            console.log('All caches cleared');
+          });
+        }
+      }
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
