@@ -6,7 +6,9 @@ This document defines the standard tags used across all content (readings, posts
 
 ## Core Tags (8 categories)
 
-All content should use one primary tag from the list below, plus any additional relevant tags. The `links/readings` tag is automatically added to all reading posts.
+All content should use 1-3 tags from the list below. The `links/readings` tag is automatically added to all reading posts.
+
+**The 8 Core Tags:** `ai`, `career`, `engineering`, `softskills`, `management`, `interviews`, `work`, `knowledge`, `culture`
 
 ### 1. `ai`
 **Purpose:** Content about artificial intelligence, machine learning, and AI tooling.
@@ -201,19 +203,21 @@ Ask yourself:
 
 ## Tag Evolution History
 
-### December 29, 2025 - Major Consolidation
-**Reason:** Too many single-use tags, inconsistent naming
+### December 29, 2025 - Major Consolidation (Phase 2)
+**Reason:** Too many fragmented tags across posts and readings (28+ unique tags)
 
 **Changes:**
 - Merged `soft-skills` and `softskills` → `softskills` (standardized)
 - Merged `interviews` and `interviewing` → `interviews`
-- Merged `work` and `working` → `work`
-- Merged `frontend`, `backend`, `tooling` → `engineering`
-- Merged `tech`, `social-media`, `rants` → `culture`
+- Merged `work`, `working`, `workplace`, `productivity`, `methodology` → `work`
+- Merged `frontend`, `backend`, `tooling`, `programming`, `debugging`, `performance`, `astro`, `static sites`, `web development`, `problem-solving` → `engineering`
+- Merged `tech`, `social-media`, `rants`, `digital-consumption` → `culture`
+- Merged `learning`, `books`, `conference` → `knowledge`
+- Merged `communication` → `softskills`
 
-**Impact:** Reduced from 15+ tags to 8 core categories
+**Impact:** Reduced from 28+ tags to 8 core categories
 
-**Files updated:** 13 reading posts
+**Files updated:** 13 reading posts + 16 blog posts = 29 files total
 
 ---
 
