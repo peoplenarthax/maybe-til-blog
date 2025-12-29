@@ -1,0 +1,35 @@
+---
+title: "Code Review Can Be Better"
+description: "TigerBeetle's experiment with git-review: storing code review state in the repository itself and using local tools instead of web interfaces, exploring how we might reimagine development processes beyond current tooling constraints."
+pubDate: 2025-12-22
+tags: ["engineering", "links/readings"]
+contentType: "reading"
+originalTitle: "Code Review Can Be Better"
+originalAuthor: "matklad"
+originalUrl: "https://tigerbeetle.com/blog/2025-08-04-code-review-can-be-better/"
+originalSite: "TigerBeetle Blog"
+originalPubDate: 2025-08-04
+briefSummary: "TigerBeetle experimented with git-review, a tool that stores review state in the repository and allows reviewing code locally in your editor rather than through web interfaces. While the basic idea worked well, practical issues with merge conflicts and git workflow friction led them to shelve it. The experiment highlights how current code review processes might be reimagined."
+personalNotes: "It's interesting how we got stuck on tooling and process (such as gh pr review). git-review is just a different way of facing it. What other processes shall we reimagine with AI? I think that even commit history needs to be reviewed on 'feature wise' instead of change-based commits. I've never been proficient on git practices nor on high efficiency tooling as I believe some parts of the process are ok to be slow to give some space for thinking. But making tooling around solving issues instead of technology wrapping solutions is my way to go."
+keyTakeaways:
+  - "Review state should ideally be stored in the repository, not remote databases"
+  - "Local editor-based review is more powerful than web interfaces"
+  - "The 'code review as a commit' approach has impedance mismatches with git's state model"
+  - "We're stuck on current tooling patterns (GitHub PR review) without reimagining fundamentals"
+  - "Some processes benefit from being slow to allow space for thinking"
+  - "Tooling should solve actual problems, not wrap technology solutions"
+  - "Future git features like Change-Id might enable better per-commit interdiff review"
+readingTime: 8
+---
+
+## My Thoughts
+
+It's interesting how we got stuck on tooling and process (such as GitHub PR review). [git-review](https://github.com/tigerbeetle/tigerbeetle/pull/2732/files#diff-f87bb3596894756629bc39d595fb18d479dc4edf168d93a911cadcb060f10fccR322) is just a different way of facing the same problem, but it reveals something deeper: we're not questioning the fundamentals enough.
+
+What other processes should we reimagine with AI (sorry, I needed to bring some AI in the mix)? I think even commit history needs to be reviewed on a "feature wise" basis instead of change-based commits. The way we structure our development workflow is built on decades-old assumptions that might not serve us anymore.
+
+I've never been proficient on git practices nor on high-efficiency tooling, and I think there's value in that. I believe some parts of the process are ok to be slow to give some space for thinking. Not everything needs to be optimized for speed.
+
+But making tooling around solving actual issues instead of technology wrapping solutions is my way to go. The difference matters: are we building tools to solve real problems, or are we just wrapping existing technology in new interfaces? And this is a broader topic, but if we are already missing this in the tooling, what aren't we missing in the things we build with it?
+
+
